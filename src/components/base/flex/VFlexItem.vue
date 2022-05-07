@@ -5,14 +5,14 @@ export type VFlexItemAlignSelf =
   | 'flex-end'
   | 'center'
   | 'baseline'
-  | 'stretch'
+  | 'stretch';
 
 export interface VFlexItemProps {
-  order?: string | number
-  flexGrow?: string | number
-  flexShrink?: number
-  flexBasis?: string | 'auto'
-  alignSelf?: VFlexItemAlignSelf
+  order?: string | number;
+  flexGrow?: string | number;
+  flexShrink?: number;
+  flexBasis?: string | 'auto';
+  alignSelf?: VFlexItemAlignSelf;
 }
 
 const props = withDefaults(defineProps<VFlexItemProps>(), {
@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<VFlexItemProps>(), {
   flexShrink: 0,
   flexBasis: 'auto',
   alignSelf: 'auto',
-})
+});
 </script>
 
 <template>

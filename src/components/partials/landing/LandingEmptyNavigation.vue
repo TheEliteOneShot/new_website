@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { useWindowScroll } from '@vueuse/core'
-import { computed, ref, watchEffect } from 'vue'
-import VueScrollTo from 'vue-scrollto'
+import { useWindowScroll } from '@vueuse/core';
+import { computed, ref, watchEffect } from 'vue';
+import VueScrollTo from 'vue-scrollto';
 
-import { isLargeScreen } from '/@src/utils/responsive'
-import { useDarkmode } from '/@src/stores/darkmode'
+import { isLargeScreen } from '/@src/utils/responsive';
+import { useDarkmode } from '/@src/stores/darkmode';
 
-const darkmode = useDarkmode()
-const isMobileNavOpen = ref(false)
-const scrollTo = VueScrollTo.scrollTo
+const darkmode = useDarkmode();
+const isMobileNavOpen = ref(false);
+const scrollTo = VueScrollTo.scrollTo;
 
-const { y } = useWindowScroll()
+const { y } = useWindowScroll();
 
 const isScrolling = computed(() => {
-  return y.value > 30
-})
+  return y.value > 30;
+});
 
 watchEffect(() => {
   if (isLargeScreen.value) {
-    isMobileNavOpen.value = false
+    isMobileNavOpen.value = false;
   }
-})
+});
 </script>
 
 <template>
@@ -90,6 +90,7 @@ watchEffect(() => {
             </span>
           </label>
         </div>
+
         <div class="navbar-item">
           <RouterLink :to="{ name: 'auth-login' }" class="nav-link"> Login </RouterLink>
         </div>
@@ -139,8 +140,7 @@ watchEffect(() => {
           .navbar-menu {
             .navbar-item {
               &.is-theme-toggle {
-                opacity: 0;
-                pointer-events: none;
+                opacity: 1;
                 transition: color 0.3s, background-color 0.3s, border-color 0.3s,
                   height 0.3s, width 0.3s;
               }

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-export type VPlaceloadAvatarSize = 'small' | 'medium' | 'large' | 'big' | 'xl'
-export type VPlaceloadAvatarRounded = 'full' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type VPlaceloadAvatarSize = 'small' | 'medium' | 'large' | 'big' | 'xl';
+export type VPlaceloadAvatarRounded = 'full' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export interface VPlaceloadAvatarProps {
-  size?: VPlaceloadAvatarSize
-  rounded?: VPlaceloadAvatarRounded
-  centered?: boolean
-  disabled?: boolean
+  size?: VPlaceloadAvatarSize;
+  rounded?: VPlaceloadAvatarRounded;
+  centered?: boolean;
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<VPlaceloadAvatarProps>(), {
   size: undefined,
   rounded: 'full',
-})
+});
 </script>
 
 <template>

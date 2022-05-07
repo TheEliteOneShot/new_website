@@ -9,28 +9,28 @@
  * @see /src/components/partials/panels/ActivityPanel.vue
  */
 
-import { acceptHMRUpdate, defineStore } from 'pinia'
-import { useStorage } from '@vueuse/core'
+import { acceptHMRUpdate, defineStore } from 'pinia';
+import { useStorage } from '@vueuse/core';
 
-export type ActivePanelId = 'none' | 'search' | 'languages' | 'activity' | 'task'
+export type ActivePanelId = 'none' | 'search' | 'languages' | 'activity' | 'task';
 
 export const usePanels = defineStore('panels', () => {
-  const active = useStorage<ActivePanelId>('active-panel', 'none')
+  const active = useStorage<ActivePanelId>('active-panel', 'none');
 
   function setActive(panelId: ActivePanelId) {
-    active.value = panelId
+    active.value = panelId;
   }
 
   function close() {
-    active.value = 'none'
+    active.value = 'none';
   }
 
   return {
     active,
     setActive,
     close,
-  } as const
-})
+  } as const;
+});
 
 /**
  * Pinia supports Hot Module replacement so you can edit your stores and
@@ -40,5 +40,5 @@ export const usePanels = defineStore('panels', () => {
  * @see https://vitejs.dev/guide/api-hmr.html
  */
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(usePanels, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(usePanels, import.meta.hot));
 }

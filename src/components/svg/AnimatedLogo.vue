@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps<{
-  light?: boolean
-}>()
+  light?: boolean;
+}>();
 
-const router = useRouter()
-const isLoading = ref(false)
+const router = useRouter();
+const isLoading = ref(false);
 
 router.beforeEach(() => {
-  isLoading.value = true
-})
+  isLoading.value = true;
+});
 router.afterEach(() => {
   setTimeout(() => {
-    isLoading.value = false
-  }, 200)
-})
+    isLoading.value = false;
+  }, 200);
+});
 </script>
 
 <template>

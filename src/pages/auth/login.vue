@@ -1,38 +1,39 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useHead } from '@vueuse/head'
-import { toFormValidator } from '@vee-validate/zod'
-import { useDarkmode } from '/@src/stores/darkmode'
-import { useUserSession } from '/@src/stores/userSession'
-import { useNotyf } from '/@src/composable/useNotyf'
-import { z as zod } from 'zod'
-import { useForm } from 'vee-validate'
-import { loginUser, getUser } from '/@src/utils/api/user'
-import { useApi } from '/@src/composable/useApi'
+import { ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { useHead } from '@vueuse/head';
+import { toFormValidator } from '@vee-validate/zod';
+import { useDarkmode } from '/@src/stores/darkmode';
+import { useUserSession } from '/@src/stores/userSession';
+import { useNotyf } from '/@src/composable/useNotyf';
+import { z as zod } from 'zod';
+import { useForm } from 'vee-validate';
+import { loginUser, getUser } from '/@src/utils/api/user';
+import { useApi } from '/@src/composable/useApi';
 
-const isLoading = ref(false)
-const darkmode = useDarkmode()
-const router = useRouter()
+const isLoading = ref(false);
+const darkmode = useDarkmode();
+const router = useRouter();
 const userSession = useUserSession();
-const route = useRoute()
-const notif = useNotyf()
+const route = useRoute();
+const notif = useNotyf();
 const api = useApi();
-const redirect = route.query.redirect as string
+const redirect = route.query.redirect as string;
 
 const validationSchema = toFormValidator(
-  zod
-    .object({
-      credential: zod
-        .string({
-          required_error: "A username or email is required",
-        }).nonempty('You must provide a password'),
-      password: zod
-        .string({
-          required_error: 'A password is required',
-        }).nonempty('You must provide a password')
-    })
-)
+  zod.object({
+    credential: zod
+      .string({
+        required_error: 'A username or email is required',
+      })
+      .nonempty('You must provide a password'),
+    password: zod
+      .string({
+        required_error: 'A password is required',
+      })
+      .nonempty('You must provide a password'),
+  })
+);
 
 const { handleSubmit, setFieldError } = useForm({
   validationSchema,
@@ -40,40 +41,40 @@ const { handleSubmit, setFieldError } = useForm({
     credential: '',
     password: '',
   },
-})
+});
 
 const handleLogin = handleSubmit(async (values) => {
   if (!isLoading.value) {
-    isLoading.value = true
+    isLoading.value = true;
 
-    notif.dismissAll()
+    notif.dismissAll();
 
     await loginUser(api, { credential: values.credential, password: values.password })
       .then(async (tokens) => {
-        notif.success('Login Successful')
+        notif.success('Login Successful');
         userSession.setToken(tokens?.access_token);
         userSession.setRefreshToken(tokens?.refresh_token);
-        await getUser(api).then((user) => userSession.setUser(user))
+        await getUser(api).then((user) => userSession.setUser(user));
         if (redirect) {
-          router.push(redirect)
+          router.push(redirect);
         } else {
           router.push({
             name: 'app',
-          })
+          });
         }
       })
       .catch(() => {
-        setFieldError('credential', 'Invalid Combination')
-        setFieldError('password', 'Invalid Combination')
-      })
+        setFieldError('credential', 'Invalid Combination');
+        setFieldError('password', 'Invalid Combination');
+      });
 
-    isLoading.value = false
+    isLoading.value = false;
   }
-})
+});
 
 useHead({
   title: 'Login',
-})
+});
 </script>
 
 <template>
@@ -87,9 +88,16 @@ useHead({
         </RouterLink>
       </div>
       <div class="right">
-        <label class="dark-mode ml-auto" tabindex="0"
-          @keydown.space.prevent="(e) => (e.target as HTMLLabelElement).click()">
-          <input type="checkbox" :checked="!darkmode.isDark" @change="darkmode.onChange" />
+        <label
+          class="dark-mode ml-auto"
+          tabindex="0"
+          @keydown.space.prevent="(e) => (e.target as HTMLLabelElement).click()"
+        >
+          <input
+            type="checkbox"
+            :checked="!darkmode.isDark"
+            @change="darkmode.onChange"
+          />
           <span></span>
         </label>
       </div>
@@ -121,7 +129,11 @@ useHead({
               </VField>
               <VField id="password" v-slot="{ field }">
                 <VControl icon="feather:lock">
-                  <VInput type="password" placeholder="Password" autocomplete="current-password" />
+                  <VInput
+                    type="password"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                  />
                   <p v-if="field?.errorMessage" class="help is-danger">
                     {{ field.errorMessage }}
                   </p>
@@ -137,7 +149,14 @@ useHead({
 
               <!-- Submit -->
               <div class="login">
-                <VButton :loading="isLoading" type="submit" color="primary" bold fullwidth raised>
+                <VButton
+                  :loading="isLoading"
+                  type="submit"
+                  color="primary"
+                  bold
+                  fullwidth
+                  raised
+                >
                   Sign In
                 </VButton>
               </div>

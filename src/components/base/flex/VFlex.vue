@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
-export type VFlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
-export type VFlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse'
+export type VFlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';
+export type VFlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
 export type VFlexJustifyContent =
   | 'flex-start'
   | 'flex-end'
@@ -14,7 +14,7 @@ export type VFlexJustifyContent =
   | 'space-between'
   | 'space-around'
   | 'space-evenly'
-  | 'normal'
+  | 'normal';
 export type VFlexAlignItems =
   | 'flex-start'
   | 'flex-end'
@@ -25,7 +25,7 @@ export type VFlexAlignItems =
   | 'center'
   | 'baseline'
   | 'stretch'
-  | 'normal'
+  | 'normal';
 export type VFlexAlignContent =
   | 'flex-start'
   | 'flex-end'
@@ -37,17 +37,17 @@ export type VFlexAlignContent =
   | 'space-between'
   | 'space-around'
   | 'space-evenly'
-  | 'normal'
+  | 'normal';
 
 export interface VFlexProps {
-  inline?: boolean
-  flexDirection?: VFlexDirection
-  flexWrap?: VFlexWrap
-  justifyContent?: VFlexJustifyContent
-  alignItems?: VFlexAlignItems
-  alignContent?: VFlexAlignContent
-  rowGap?: string
-  columnGap?: string
+  inline?: boolean;
+  flexDirection?: VFlexDirection;
+  flexWrap?: VFlexWrap;
+  justifyContent?: VFlexJustifyContent;
+  alignItems?: VFlexAlignItems;
+  alignContent?: VFlexAlignContent;
+  rowGap?: string;
+  columnGap?: string;
 }
 
 const props = withDefaults(defineProps<VFlexProps>(), {
@@ -58,8 +58,8 @@ const props = withDefaults(defineProps<VFlexProps>(), {
   alignContent: 'normal',
   rowGap: 'normal',
   columnGap: 'normal',
-})
-const display = computed(() => (props.inline ? 'inline-flex' : 'flex'))
+});
+const display = computed(() => (props.inline ? 'inline-flex' : 'flex'));
 </script>
 
 <template>

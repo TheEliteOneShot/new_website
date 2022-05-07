@@ -1,9 +1,9 @@
 <script setup lang="ts">
 export interface VTagsProps {
-  addons?: boolean
+  addons?: boolean;
 }
 
-const props = defineProps<VTagsProps>()
+const props = defineProps<VTagsProps>();
 </script>
 
 <template>

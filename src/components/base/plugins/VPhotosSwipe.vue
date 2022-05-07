@@ -1,59 +1,59 @@
 <script lang="ts">
-import 'photoswipe/dist/photoswipe.css'
-import 'photoswipe/dist/default-skin/default-skin.css'
+import 'photoswipe/dist/photoswipe.css';
+import 'photoswipe/dist/default-skin/default-skin.css';
 
-let instances = 0
+let instances = 0;
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import PhotoSwipe from 'photoswipe'
-import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default'
-import { onceImageErrored } from '/@src/utils/via-placeholder'
+import { ref, onMounted } from 'vue';
+import PhotoSwipe from 'photoswipe';
+import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
+import { onceImageErrored } from '/@src/utils/via-placeholder';
 
 export interface VPhotoSwipeItem {
-  src: string
-  msrc?: string
-  thumbnail?: string
-  alt?: string
-  w?: number
-  h?: number
-  title?: string
-  el?: HTMLElement
+  src: string;
+  msrc?: string;
+  thumbnail?: string;
+  alt?: string;
+  w?: number;
+  h?: number;
+  title?: string;
+  el?: HTMLElement;
 }
 export interface VPhotoSwipeProps {
-  items?: VPhotoSwipeItem[]
-  options?: PhotoSwipe.Options
-  singleThumbnail?: boolean
-  thumbnailRadius?: string
+  items?: VPhotoSwipeItem[];
+  options?: PhotoSwipe.Options;
+  singleThumbnail?: boolean;
+  thumbnailRadius?: string;
 }
 
 const props = withDefaults(defineProps<VPhotoSwipeProps>(), {
   items: () => [],
   options: () => ({}),
   thumbnailRadius: undefined,
-})
+});
 
-const galleryUID = ++instances
-const angle = ref(0)
-const pswpElement = ref<HTMLElement>()
-const galleryElement = ref<HTMLElement>()
+const galleryUID = ++instances;
+const angle = ref(0);
+const pswpElement = ref<HTMLElement>();
+const galleryElement = ref<HTMLElement>();
 
 const resolveImageSrc = async function (item: any) {
   return new Promise((resolve) => {
-    const img = new Image()
+    const img = new Image();
     img.onerror = function () {
-      img.onerror = null
-      resolve(item.msrc)
-    }
+      img.onerror = null;
+      resolve(item.msrc);
+    };
     img.onload = function () {
-      img.onload = null
-      resolve(item.src)
-    }
-    img.style.display = 'none'
-    img.src = item.src
-  })
-}
+      img.onload = null;
+      resolve(item.src);
+    };
+    img.style.display = 'none';
+    img.src = item.src;
+  });
+};
 
 // parse slide data (url, title, size ...) from DOM elements
 // (children of gallerySelector)
@@ -64,26 +64,26 @@ const parseThumbnailElements = async function (el: HTMLElement) {
     figureEl,
     linkEl,
     size,
-    item: any
+    item: any;
 
   for (let i = 0; i < numNodes; i++) {
-    figureEl = thumbElements[i] as HTMLElement // <figure> element
+    figureEl = thumbElements[i] as HTMLElement; // <figure> element
 
     // include only element nodes
     if (figureEl.nodeType !== 1) {
-      continue
+      continue;
     }
 
-    linkEl = figureEl.children[0] // <a> element
+    linkEl = figureEl.children[0]; // <a> element
 
     if (!linkEl) {
-      continue
+      continue;
     }
 
-    size = linkEl.getAttribute('data-size')?.split('x')
+    size = linkEl.getAttribute('data-size')?.split('x');
 
     if (!size) {
-      continue
+      continue;
     }
 
     // create slide object
@@ -92,43 +92,43 @@ const parseThumbnailElements = async function (el: HTMLElement) {
       w: parseInt(size[0], 10),
       h: parseInt(size[1], 10),
       title: linkEl.getAttribute('title'),
-    }
+    };
 
     if (figureEl.children.length > 1) {
       // <figcaption> content
-      item.title = figureEl.children[1].innerHTML
+      item.title = figureEl.children[1].innerHTML;
     }
 
     if (linkEl.children.length > 0) {
       // <img> thumbnail element, retrieving thumbnail url
-      item.msrc = linkEl.children[0].getAttribute('src')
+      item.msrc = linkEl.children[0].getAttribute('src');
     }
 
-    item.src = await resolveImageSrc(item)
+    item.src = await resolveImageSrc(item);
 
-    item.el = figureEl // save link to element for getThumbBoundsFn
-    items.push(item)
+    item.el = figureEl; // save link to element for getThumbBoundsFn
+    items.push(item);
   }
 
-  return items
-}
+  return items;
+};
 
 // find nearest parent element
 const closest = function closest(el: any, fn: Function): HTMLElement {
-  return el && (fn(el) ? el : closest(el.parentNode, fn))
-}
+  return el && (fn(el) ? el : closest(el.parentNode, fn));
+};
 
 // triggers when user clicks on thumbnail
 const onThumbnailsClick = async function (e: Event) {
-  let eTarget = e.target
+  let eTarget = e.target;
 
   // find root element of slide
   let clickedListItem = closest(eTarget, function (el: HTMLElement) {
-    return el.tagName && el.tagName.toUpperCase() === 'FIGURE'
-  })
+    return el.tagName && el.tagName.toUpperCase() === 'FIGURE';
+  });
 
   if (!clickedListItem) {
-    return
+    return;
   }
 
   // find index of clicked item by looping through all child nodes
@@ -136,54 +136,54 @@ const onThumbnailsClick = async function (e: Event) {
   let childNodes = (clickedListItem.parentNode as HTMLElement).childNodes,
     numChildNodes = childNodes.length,
     nodeIndex = 0,
-    index
+    index;
 
   for (let i = 0; i < numChildNodes; i++) {
     if (childNodes[i].nodeType !== 1) {
-      continue
+      continue;
     }
 
     if (childNodes[i] === clickedListItem) {
-      index = nodeIndex
-      break
+      index = nodeIndex;
+      break;
     }
-    nodeIndex++
+    nodeIndex++;
   }
 
   if (galleryElement.value && index !== undefined && index >= 0) {
     // open PhotoSwipe if valid index found
-    await openPhotoSwipe(index.toString(), galleryElement.value)
+    await openPhotoSwipe(index.toString(), galleryElement.value);
   }
-  return false
-}
+  return false;
+};
 
 // parse picture index and gallery index from URL (#&pid=1&gid=2)
 const photoswipeParseHash = function () {
   let hash = window.location.hash.substring(1),
-    params: Record<string, any> = {}
+    params: Record<string, any> = {};
 
   if (typeof hash !== 'string' || hash.length < 5) {
-    return params
+    return params;
   }
 
-  let vars = hash.split('&')
+  let vars = hash.split('&');
   for (let i = 0; i < vars.length; i++) {
     if (!vars[i]) {
-      continue
+      continue;
     }
-    let pair = vars[i].split('=')
+    let pair = vars[i].split('=');
     if (pair.length < 2) {
-      continue
+      continue;
     }
-    params[pair[0]] = pair[1]
+    params[pair[0]] = pair[1];
   }
 
   if (params.gid) {
-    params.gid = parseInt(params.gid, 10)
+    params.gid = parseInt(params.gid, 10);
   }
 
-  return params
-}
+  return params;
+};
 
 const openPhotoSwipe = async function (
   index: string,
@@ -192,15 +192,15 @@ const openPhotoSwipe = async function (
   fromURL = false
 ) {
   if (!galleryElement) {
-    return
+    return;
   }
   if (!pswpElement.value) {
-    return
+    return;
   }
 
-  let gallery: any, options: any, items: any
+  let gallery: any, options: any, items: any;
 
-  items = await parseThumbnailElements(galleryElement)
+  items = await parseThumbnailElements(galleryElement);
 
   // define options (if needed)
   options = {
@@ -211,11 +211,11 @@ const openPhotoSwipe = async function (
       // See Options -> getThumbBoundsFn section of documentation for more info
       let thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
         pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-        rect = thumbnail.getBoundingClientRect()
+        rect = thumbnail.getBoundingClientRect();
 
-      return { x: rect.left, y: rect.top + pageYScroll, w: rect.width }
+      return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
     },
-  }
+  };
 
   // PhotoSwipe opened from URL
   if (fromURL) {
@@ -224,25 +224,25 @@ const openPhotoSwipe = async function (
       // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
       for (let j = 0; j < items.length; j++) {
         if (items[j].pid == index) {
-          options.index = j
-          break
+          options.index = j;
+          break;
         }
       }
     } else {
       // in URL indexes start from 1
-      options.index = parseInt(index, 10) - 1
+      options.index = parseInt(index, 10) - 1;
     }
   } else {
-    options.index = parseInt(index, 10)
+    options.index = parseInt(index, 10);
   }
 
   // exit if index not found
   if (isNaN(options.index)) {
-    return
+    return;
   }
 
   if (disableAnimation) {
-    options.showAnimationDuration = 0
+    options.showAnimationDuration = 0;
   }
 
   // Pass data to PhotoSwipe and initialize it
@@ -251,34 +251,34 @@ const openPhotoSwipe = async function (
     PhotoSwipeUI_Default,
     items,
     Object.assign(options, props.options)
-  )
+  );
   gallery.listen('gettingData', function (index: any, item: any) {
     if (item.w < 1 || item.h < 1) {
       // unknown size
-      let img = new Image()
+      let img = new Image();
       img.onload = function () {
         // will get size after load
-        item.w = img.width // set image width
-        item.h = img.height // set image height
-        gallery.invalidateCurrItems() // reinit Items
-        gallery.updateSize(true) // reinit Items
-      }
-      img.style.display = 'none'
-      img.src = item.src // let's download image
+        item.w = img.width; // set image width
+        item.h = img.height; // set image height
+        gallery.invalidateCurrItems(); // reinit Items
+        gallery.updateSize(true); // reinit Items
+      };
+      img.style.display = 'none';
+      img.src = item.src; // let's download image
     }
-  })
-  gallery.init()
-}
+  });
+  gallery.init();
+};
 
 // Parse URL and open gallery if it contains #&pid=3&gid=1
 onMounted(() => {
   if (galleryElement.value) {
-    let hashData = photoswipeParseHash()
+    let hashData = photoswipeParseHash();
     if (hashData.pid && hashData.gid === galleryUID) {
-      openPhotoSwipe(hashData.pid.toString(), galleryElement.value, true, true)
+      openPhotoSwipe(hashData.pid.toString(), galleryElement.value, true, true);
     }
   }
-})
+});
 
 // const rotate = (newAngle: number) => {
 //   if (pswpElement.value) {
@@ -291,12 +291,12 @@ onMounted(() => {
 
 const resetAngle = () => {
   if (pswpElement.value) {
-    angle.value = 0
+    angle.value = 0;
     pswpElement.value
       .querySelectorAll('.pswp__img')
-      .forEach((i) => ((i as HTMLElement).style.transform = `rotate(${angle.value}deg)`))
+      .forEach((i) => ((i as HTMLElement).style.transform = `rotate(${angle.value}deg)`));
   }
-}
+};
 </script>
 
 <template>

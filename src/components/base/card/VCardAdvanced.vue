@@ -1,12 +1,12 @@
 <script setup lang="ts">
-export type VCardAdvancedRadius = 'regular' | 'smooth' | 'rounded'
+export type VCardAdvancedRadius = 'regular' | 'smooth' | 'rounded';
 export interface VCardAdvancedProps {
-  radius?: VCardAdvancedRadius
+  radius?: VCardAdvancedRadius;
 }
 
 const props = withDefaults(defineProps<VCardAdvancedProps>(), {
   radius: 'regular',
-})
+});
 </script>
 
 <template>

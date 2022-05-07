@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { initDarkmode } from '/@src/stores/darkmode'
+import { initDarkmode } from '/@src/stores/darkmode';
 
 // This is the global app setup function
 
@@ -8,7 +8,7 @@ import { initDarkmode } from '/@src/stores/darkmode'
  *
  * @see /@src/stores/darkmode
  */
-initDarkmode()
+initDarkmode();
 </script>
 
 <template>

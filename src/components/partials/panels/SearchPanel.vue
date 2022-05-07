@@ -1,32 +1,35 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref } from 'vue';
 
-import type { VAvatarProps, VAvatarColor } from '/@src/components/base/avatar/VAvatar.vue'
-import { usePanels } from '/@src/stores/panels'
-import { popovers } from '/@src/data/users/userPopovers'
-import { UserPopover } from '/@src/models/users'
+import type {
+  VAvatarProps,
+  VAvatarColor,
+} from '/@src/components/base/avatar/VAvatar.vue';
+import { usePanels } from '/@src/stores/panels';
+import { popovers } from '/@src/data/users/userPopovers';
+import { UserPopover } from '/@src/models/users';
 
-const panels = usePanels()
-const filter = ref('')
+const panels = usePanels();
+const filter = ref('');
 const filteredData = computed(() => {
   if (!filter.value) {
-    return []
+    return [];
   }
 
   return Object.values(popovers).filter((user) => {
     return (
       user.fullName.match(new RegExp(filter.value, 'i')) ||
       user.position.match(new RegExp(filter.value, 'i'))
-    )
-  })
-})
+    );
+  });
+});
 
 function getAvatarData(user: UserPopover): VAvatarProps {
   return {
     picture: user.avatar,
     initials: user.initials,
     color: user.color as VAvatarColor,
-  }
+  };
 }
 </script>
 
@@ -119,7 +122,7 @@ function getAvatarData(user: UserPopover): VAvatarProps {
                   :offset="[0, 10]"
                   placement="top-start"
                 >
-                  <VAvatar size="small" picture="/demo/avatars/7.jpg" />
+                  <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                   <template #content>
                     <UserPopoverContent :user="popovers.user7" />
                   </template>
@@ -135,7 +138,7 @@ function getAvatarData(user: UserPopover): VAvatarProps {
                   :offset="[0, 10]"
                   placement="top-start"
                 >
-                  <VAvatar size="small" picture="/demo/avatars/13.jpg" />
+                  <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                   <template #content>
                     <UserPopoverContent :user="popovers.user13" />
                   </template>
@@ -151,7 +154,7 @@ function getAvatarData(user: UserPopover): VAvatarProps {
                   :offset="[0, 10]"
                   placement="top-start"
                 >
-                  <VAvatar size="small" picture="/demo/avatars/22.jpg" />
+                  <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                   <template #content>
                     <UserPopoverContent :user="popovers.user22" />
                   </template>

@@ -1,41 +1,41 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 export interface VAccordionItem {
-  title: string
-  content: string
+  title: string;
+  content: string;
 }
 export interface VAccordionProps {
-  items: VAccordionItem[]
-  openItems?: number[]
-  exclusive?: boolean
+  items: VAccordionItem[];
+  openItems?: number[];
+  exclusive?: boolean;
 }
 
 const props = withDefaults(defineProps<VAccordionProps>(), {
   items: () => [],
   openItems: () => [],
-})
+});
 
-const internalOpenItems = ref(props.openItems)
+const internalOpenItems = ref(props.openItems);
 const toggle = (key: number) => {
-  const wasOpen = internalOpenItems.value.includes(key)
+  const wasOpen = internalOpenItems.value.includes(key);
 
   if (props.exclusive) {
-    internalOpenItems.value.splice(0, internalOpenItems.value.length)
+    internalOpenItems.value.splice(0, internalOpenItems.value.length);
 
     if (!wasOpen) {
-      internalOpenItems.value.push(key)
+      internalOpenItems.value.push(key);
     }
 
-    return
+    return;
   }
 
   if (wasOpen) {
-    internalOpenItems.value.splice(internalOpenItems.value.indexOf(key), 1)
+    internalOpenItems.value.splice(internalOpenItems.value.indexOf(key), 1);
   } else {
-    internalOpenItems.value.push(key)
+    internalOpenItems.value.push(key);
   }
-}
+};
 </script>
 
 <template>

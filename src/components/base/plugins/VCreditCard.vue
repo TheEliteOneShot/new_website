@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import type { VCreditCardColor } from '/@src/composable/useCreditcardMask'
+import type { VCreditCardColor } from '/@src/composable/useCreditcardMask';
 
 export interface VCreditCardEmits {
-  (e: 'flip'): void
+  (e: 'flip'): void;
 }
 export interface VCreditCardProps {
-  number?: string
-  name?: string
-  expiry?: string
-  cvc?: string | number
-  color?: VCreditCardColor
-  flipped?: boolean
+  number?: string;
+  name?: string;
+  expiry?: string;
+  cvc?: string | number;
+  color?: VCreditCardColor;
+  flipped?: boolean;
 }
 
-const emit = defineEmits<VCreditCardEmits>()
+const emit = defineEmits<VCreditCardEmits>();
 const props = withDefaults(defineProps<VCreditCardProps>(), {
   color: 'grey',
   name: 'John Doe',
   number: '1234 1234 1234 1234',
   cvc: '123',
   expiry: '01/30',
-})
+});
 
-const { t } = useI18n()
-const nameUppercase = computed(() => props.name?.toUpperCase() ?? '')
+const { t } = useI18n();
+const nameUppercase = computed(() => props.name?.toUpperCase() ?? '');
 </script>
 
 <i18n lang="yaml">

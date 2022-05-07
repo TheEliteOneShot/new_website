@@ -1,19 +1,19 @@
-import { ref } from 'vue'
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import { ref } from 'vue';
+import { acceptHMRUpdate, defineStore } from 'pinia';
 
 export const useViewWrapper = defineStore('viewWrapper', () => {
-  const isPushed = ref(false)
-  const isPushedBlock = ref(false)
-  const pageTitle = ref('Welcome')
+  const isPushed = ref(false);
+  const isPushedBlock = ref(false);
+  const pageTitle = ref('Welcome');
 
   function setPushed(value: boolean) {
-    isPushed.value = value
+    isPushed.value = value;
   }
   function setPushedBlock(value: boolean) {
-    isPushedBlock.value = value
+    isPushedBlock.value = value;
   }
   function setPageTitle(value: string) {
-    pageTitle.value = value
+    pageTitle.value = value;
   }
 
   return {
@@ -23,8 +23,8 @@ export const useViewWrapper = defineStore('viewWrapper', () => {
     setPushed,
     setPushedBlock,
     setPageTitle,
-  } as const
-})
+  } as const;
+});
 
 /**
  * Pinia supports Hot Module replacement so you can edit your stores and
@@ -34,5 +34,5 @@ export const useViewWrapper = defineStore('viewWrapper', () => {
  * @see https://vitejs.dev/guide/api-hmr.html
  */
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useViewWrapper, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useViewWrapper, import.meta.hot));
 }

@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { PropType } from 'vue'
-import type { RouteLocationRaw } from 'vue-router'
-import { CssUnitRe } from '/@src/utils/regex'
-import { computed, defineComponent, h } from 'vue'
-import { RouterLink } from 'vue-router'
+import type { PropType } from 'vue';
+import type { RouteLocationRaw } from 'vue-router';
+import { CssUnitRe } from '/@src/utils/regex';
+import { computed, defineComponent, h } from 'vue';
+import { RouterLink } from 'vue-router';
 
-import VPlaceload from '../loader/VPlaceload.vue'
+import VPlaceload from '../loader/VPlaceload.vue';
 
-export type VButtonSize = 'medium' | 'big' | 'huge'
+export type VButtonSize = 'medium' | 'big' | 'huge';
 export type VButtonColor =
   | 'primary'
   | 'info'
@@ -16,8 +16,8 @@ export type VButtonColor =
   | 'danger'
   | 'white'
   | 'dark'
-  | 'light'
-export type VButtonDark = '1' | '2' | '3' | '4' | '5' | '6'
+  | 'light';
+export type VButtonDark = '1' | '2' | '3' | '4' | '5' | '6';
 
 export default defineComponent({
   props: {
@@ -44,10 +44,10 @@ export default defineComponent({
         if (value.match(CssUnitRe) === null) {
           console.warn(
             `VButton: invalid "${value}" placeload. Should be a valid css unit value.`
-          )
+          );
         }
 
-        return true
+        return true;
       },
     },
     color: {
@@ -70,11 +70,11 @@ export default defineComponent({
         ) {
           console.warn(
             `VButton: invalid "${value}" color. Should be primary, info, success, warning, danger, dark, light, white or undefined`
-          )
-          return false
+          );
+          return false;
         }
 
-        return true
+        return true;
       },
     },
     size: {
@@ -85,11 +85,11 @@ export default defineComponent({
         if ([undefined, 'medium', 'big', 'huge'].indexOf(value) === -1) {
           console.warn(
             `VButton: invalid "${value}" size. Should be big, huge, medium or undefined`
-          )
-          return false
+          );
+          return false;
         }
 
-        return true
+        return true;
       },
     },
     dark: {
@@ -100,11 +100,11 @@ export default defineComponent({
         if ([undefined, '1', '2', '3', '4', '5', '6'].indexOf(value) === -1) {
           console.warn(
             `VButton: invalid "${value}" dark. Should be 1, 2, 3, 4, 5, 6 or undefined`
-          )
-          return false
+          );
+          return false;
         }
 
-        return true
+        return true;
       },
     },
     rounded: {
@@ -158,7 +158,7 @@ export default defineComponent({
   },
   setup(props, { slots, attrs }) {
     const classes = computed(() => {
-      const defaultClasses = (attrs?.class ?? []) as string[]
+      const defaultClasses = (attrs?.class ?? []) as string[];
       return [
         ...defaultClasses,
         'button',
@@ -178,60 +178,60 @@ export default defineComponent({
         props.color && `is-${props.color}`,
         props.light && 'is-light',
         props.static && 'is-static',
-      ]
-    })
-    const isIconify = computed(() => props.icon && props.icon.indexOf(':') !== -1)
+      ];
+    });
+    const isIconify = computed(() => props.icon && props.icon.indexOf(':') !== -1);
     const isCaretIconify = computed(
       () => props.iconCaret && props.iconCaret.indexOf(':') !== -1
-    )
+    );
 
     const getChildrens = () => {
-      const childrens = []
+      const childrens = [];
 
-      let iconWrapper
+      let iconWrapper;
       if (isIconify.value) {
         const icon = h('i', {
           'aria-hidden': true,
           class: 'iconify',
           'data-icon': props.icon,
-        })
-        iconWrapper = h('span', { class: 'icon' }, icon)
+        });
+        iconWrapper = h('span', { class: 'icon' }, icon);
       } else if (props.icon) {
-        const icon = h('i', { 'aria-hidden': true, class: props.icon })
-        iconWrapper = h('span', { class: 'icon' }, icon)
+        const icon = h('i', { 'aria-hidden': true, class: props.icon });
+        iconWrapper = h('span', { class: 'icon' }, icon);
       }
 
-      let caretWrapper
+      let caretWrapper;
       if (isCaretIconify.value) {
         const caret = h('i', {
           'aria-hidden': true,
           class: 'iconify',
           'data-icon': props.iconCaret,
-        })
-        caretWrapper = h('span', { class: 'caret' }, caret)
+        });
+        caretWrapper = h('span', { class: 'caret' }, caret);
       } else if (props.iconCaret) {
-        const caret = h('i', { 'aria-hidden': true, class: props.iconCaret })
-        caretWrapper = h('span', { class: 'caret' }, caret)
+        const caret = h('i', { 'aria-hidden': true, class: props.iconCaret });
+        caretWrapper = h('span', { class: 'caret' }, caret);
       }
 
       if (iconWrapper) {
-        childrens.push(iconWrapper)
+        childrens.push(iconWrapper);
       }
       if (props.placeload) {
         childrens.push(
           h(VPlaceload, {
             width: props.placeload,
           })
-        )
+        );
       } else {
-        childrens.push(h('span', slots.default?.()))
+        childrens.push(h('span', slots.default?.()));
       }
       if (caretWrapper) {
-        childrens.push(caretWrapper)
+        childrens.push(caretWrapper);
       }
 
-      return childrens
-    }
+      return childrens;
+    };
 
     return () => {
       if (props.to) {
@@ -246,7 +246,7 @@ export default defineComponent({
           {
             default: getChildrens,
           }
-        )
+        );
       } else if (props.href) {
         return h(
           'a',
@@ -259,7 +259,7 @@ export default defineComponent({
           {
             default: getChildrens,
           }
-        )
+        );
       }
 
       return h(
@@ -274,10 +274,10 @@ export default defineComponent({
         {
           default: getChildrens,
         }
-      )
-    }
+      );
+    };
   },
-})
+});
 </script>
 
 <style lang="scss">

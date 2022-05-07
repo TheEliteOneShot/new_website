@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useDropdown } from '/@src/composable/useDropdown'
+import { ref } from 'vue';
+import { useDropdown } from '/@src/composable/useDropdown';
 
-export type VDropdownColor = 'primary' | 'info' | 'success' | 'warning' | 'danger'
+export type VDropdownColor = 'primary' | 'info' | 'success' | 'warning' | 'danger';
 export interface VDropdownProps {
-  title?: string
-  color?: VDropdownColor
-  icon?: string
-  up?: boolean
-  right?: boolean
-  modern?: boolean
-  spaced?: boolean
+  title?: string;
+  color?: VDropdownColor;
+  icon?: string;
+  up?: boolean;
+  right?: boolean;
+  modern?: boolean;
+  spaced?: boolean;
 }
 
 const props = withDefaults(defineProps<VDropdownProps>(), {
   title: undefined,
   color: undefined,
   icon: undefined,
-})
+});
 
-const dropdownElement = ref<HTMLElement>()
-const dropdown = useDropdown(dropdownElement)
+const dropdownElement = ref<HTMLElement>();
+const dropdown = useDropdown(dropdownElement);
 
 defineExpose({
   ...dropdown,
-})
+});
 </script>
 
 <template>

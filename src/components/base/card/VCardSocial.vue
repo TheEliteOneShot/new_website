@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 export type VCardSocialNetwork =
   | 'facebook'
@@ -13,63 +13,63 @@ export type VCardSocialNetwork =
   | 'reddit'
   | 'invision'
   | 'amazon'
-  | 'instagram'
+  | 'instagram';
 
 export interface VCardSocialEmits {
-  (e: 'iconClick'): void
-  (e: 'share'): void
-  (e: 'like'): void
-  (e: 'hashtagClick', tag: string): void
+  (e: 'iconClick'): void;
+  (e: 'share'): void;
+  (e: 'like'): void;
+  (e: 'hashtagClick', tag: string): void;
 }
 export interface VCardSocialProps {
-  title: string
-  network: VCardSocialNetwork
-  hashtags?: string[]
-  avatar?: string
-  username?: string
-  shareLabel?: string
-  likeLabel?: string
+  title: string;
+  network: VCardSocialNetwork;
+  hashtags?: string[];
+  avatar?: string;
+  username?: string;
+  shareLabel?: string;
+  likeLabel?: string;
 }
 
-const emit = defineEmits<VCardSocialEmits>()
+const emit = defineEmits<VCardSocialEmits>();
 const props = withDefaults(defineProps<VCardSocialProps>(), {
   hashtags: () => [],
   avatar: undefined,
   username: undefined,
   shareLabel: 'Share',
   likeLabel: 'Like',
-})
+});
 
 const icon = computed(() => {
   switch (props.network) {
     case 'facebook':
-      return 'fa-brands:facebook-f'
+      return 'fa-brands:facebook-f';
     case 'twitter':
-      return 'fa-brands:twitter'
+      return 'fa-brands:twitter';
     case 'linkedin':
-      return 'fa-brands:linkedin-in'
+      return 'fa-brands:linkedin-in';
     case 'tumblr':
-      return 'fa-brands:tumblr'
+      return 'fa-brands:tumblr';
     case 'github':
-      return 'fa-brands:github-alt'
+      return 'fa-brands:github-alt';
     case 'dribbble':
-      return 'fa-brands:dribbble'
+      return 'fa-brands:dribbble';
     case 'google-plus':
-      return 'fa-brands:google-plus-g'
+      return 'fa-brands:google-plus-g';
     case 'youtube':
-      return 'fa-brands:youtube'
+      return 'fa-brands:youtube';
     case 'reddit':
-      return 'fa-brands:reddit-alien'
+      return 'fa-brands:reddit-alien';
     case 'invision':
-      return 'fa-brands:invision'
+      return 'fa-brands:invision';
     case 'amazon':
-      return 'fa-brands:amazon'
+      return 'fa-brands:amazon';
     case 'instagram':
-      return 'fa-brands:instagram'
+      return 'fa-brands:instagram';
   }
 
-  return ''
-})
+  return '';
+});
 </script>
 
 <template>

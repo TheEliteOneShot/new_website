@@ -1,5 +1,5 @@
-import { definePlugin } from '/@src/app'
-import { plugin as VueTippy } from 'vue-tippy'
+import { definePlugin } from '/@src/app';
+import { plugin as VueTippy } from 'vue-tippy';
 
 export default definePlugin(({ app }) => {
   app.use(VueTippy, {
@@ -7,5 +7,5 @@ export default definePlugin(({ app }) => {
     defaultProps: {
       theme: 'light',
     },
-  })
-})
+  });
+});

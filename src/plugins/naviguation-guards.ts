@@ -1,8 +1,8 @@
-import { START_LOCATION } from 'vue-router'
-import { definePlugin } from '/@src/app'
-import { useUserSession } from '/@src/stores/userSession'
-import { getUser } from '/@src/utils/api/user'
-import { useNotyf } from '/@src/composable/useNotyf'
+// import { START_LOCATION } from 'vue-router'
+import { definePlugin } from '/@src/app';
+import { useUserSession } from '/@src/stores/userSession';
+import { getUser } from '/@src/utils/api/user';
+import { useNotyf } from '/@src/composable/useNotyf';
 
 /**
  * Here we are setting up two router navigation guards
@@ -26,28 +26,28 @@ import { useNotyf } from '/@src/composable/useNotyf'
  * </template>
  */
 export default definePlugin(({ router, api, pinia }) => {
-  router.beforeEach(async (to, from) => {
-    const userSession = useUserSession(pinia)
-    const notyf = useNotyf()
-    if (to.path === "/" && userSession.isLoggedIn) {
+  router.beforeEach(async (to) => {
+    const userSession = useUserSession(pinia);
+    const notyf = useNotyf();
+    if (to.path === '/' && userSession.isLoggedIn) {
       // 1. If the name is not set, it means we are navigating to the first page
       // and we are logged in, so we should check user information from the server
 
-        // Do api request call to retreive user profile.
-        // Note that the api is provided with json-server
-        return await getUser(api)
+      // Do api request call to retreive user profile.
+      // Note that the api is provided with json-server
+      return await getUser(api)
         .then((user) => {
-          userSession.setUser(user)
-          notyf.success(`Welcome back, ${user.username}`)
-          console.log('returning app')
+          userSession.setUser(user);
+          notyf.success(`Welcome back, ${user.username}`);
+          console.log('returning app');
           return {
-            name: 'app'
-          }
+            name: 'app',
+          };
         })
         .catch(() => {
-          userSession.logoutUser()
-          notyf.error('Session Expired')
-  
+          userSession.logoutUser();
+          notyf.error('Session Expired');
+
           if (to.meta.requiresAuth) {
             // redirect the user somewhere
             return {
@@ -55,7 +55,7 @@ export default definePlugin(({ router, api, pinia }) => {
               name: 'auth',
               // save the location we were at to come back later
               query: { redirect: to.fullPath },
-            }
+            };
           }
         });
     } else if (to.meta.requiresAuth && !userSession.isLoggedIn) {
@@ -64,14 +64,14 @@ export default definePlugin(({ router, api, pinia }) => {
       notyf.error({
         message: 'You must login to access this page',
         duration: 7000,
-      })
+      });
 
       return {
         // Will follow the redirection set in /@src/pages/auth/index.vue
         name: 'auth',
         // save the location we were at to come back later
         query: { redirect: to.fullPath },
-      }
+      };
     }
-  })
-})
+  });
+});

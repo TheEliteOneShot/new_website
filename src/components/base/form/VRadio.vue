@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { ref, watch, reactive } from 'vue'
-import { useVFieldContext } from '/@src/composable/useVFieldContext'
+import { ref, watch, reactive } from 'vue';
+import { useVFieldContext } from '/@src/composable/useVFieldContext';
 
-export type VRadioColor = 'primary' | 'info' | 'success' | 'warning' | 'danger'
+export type VRadioColor = 'primary' | 'info' | 'success' | 'warning' | 'danger';
 export interface VRadioEmits {
-  (e: 'update:modelValue', value: any): void
+  (e: 'update:modelValue', value: any): void;
 }
 export interface VRadioProps {
-  id?: string
-  value: any
-  modelValue?: any
-  name?: string
-  label?: string
-  color?: VRadioColor
-  square?: boolean
-  solid?: boolean
-  paddingless?: boolean
+  id?: string;
+  value: any;
+  modelValue?: any;
+  name?: string;
+  label?: string;
+  color?: VRadioColor;
+  square?: boolean;
+  solid?: boolean;
+  paddingless?: boolean;
 }
 
-const emit = defineEmits<VRadioEmits>()
+const emit = defineEmits<VRadioEmits>();
 const props = withDefaults(defineProps<VRadioProps>(), {
   id: undefined,
   modelValue: undefined,
@@ -26,25 +26,25 @@ const props = withDefaults(defineProps<VRadioProps>(), {
   color: undefined,
   name: undefined,
   paddingless: false,
-})
+});
 
 const vFieldContext = reactive(
   useVFieldContext({
     id: props.id,
     inherit: false,
   })
-)
-const value = ref(vFieldContext?.field?.value ?? props.modelValue)
+);
+const value = ref(vFieldContext?.field?.value ?? props.modelValue);
 
 watch(value, () => {
-  emit('update:modelValue', value.value)
-})
+  emit('update:modelValue', value.value);
+});
 watch(
   () => props.modelValue,
   () => {
-    value.value = props.modelValue
+    value.value = props.modelValue;
   }
-)
+);
 </script>
 
 <template>

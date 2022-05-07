@@ -1,24 +1,24 @@
 <script setup lang="ts">
-export type VBreadcrumbSeparator = 'arrow' | 'bullet' | 'dot' | 'succeeds'
-export type VBreadcrumbAlign = 'center' | 'right'
+export type VBreadcrumbSeparator = 'arrow' | 'bullet' | 'dot' | 'succeeds';
+export type VBreadcrumbAlign = 'center' | 'right';
 export interface VBreadcrumbItem {
-  label: string
-  hideLabel?: boolean
-  icon?: string
-  link?: string
-  to?: any
+  label: string;
+  hideLabel?: boolean;
+  icon?: string;
+  link?: string;
+  to?: any;
 }
 export interface VBreadcrumbsProps {
-  items: VBreadcrumbItem[]
-  separator?: VBreadcrumbSeparator
-  align?: VBreadcrumbAlign
-  withIcons?: boolean
+  items: VBreadcrumbItem[];
+  separator?: VBreadcrumbSeparator;
+  align?: VBreadcrumbAlign;
+  withIcons?: boolean;
 }
 
 const props = withDefaults(defineProps<VBreadcrumbsProps>(), {
   separator: undefined,
   align: undefined,
-})
+});
 </script>
 
 <template>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-export type VButtonsAlign = 'centered' | 'right'
+export type VButtonsAlign = 'centered' | 'right';
 export interface VButtonsProps {
-  align?: VButtonsAlign
-  addons?: boolean
+  align?: VButtonsAlign;
+  addons?: boolean;
 }
 
 const props = withDefaults(defineProps<VButtonsProps>(), {
   align: undefined,
-})
+});
 </script>
 
 <template>

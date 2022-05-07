@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { onceImageErrored } from '/@src/utils/via-placeholder'
+import { onceImageErrored } from '/@src/utils/via-placeholder';
 
-export type VAvatarSize = 'small' | 'medium' | 'large' | 'big' | 'xl'
+export type VAvatarSize = 'small' | 'medium' | 'large' | 'big' | 'xl';
 export type VAvatarColor =
   | 'primary'
   | 'success'
@@ -13,20 +13,20 @@ export type VAvatarColor =
   | 'h-blue'
   | 'h-green'
   | 'h-red'
-  | 'h-yellow'
-export type VAvatarDotColor = 'primary' | 'success' | 'info' | 'warning' | 'danger'
+  | 'h-yellow';
+export type VAvatarDotColor = 'primary' | 'success' | 'info' | 'warning' | 'danger';
 
 export interface VAvatarProps {
-  picture?: string
-  pictureDark?: string
-  placeholder?: string
-  badge?: string
-  initials?: string
-  size?: VAvatarSize
-  color?: VAvatarColor
-  dotColor?: VAvatarDotColor
-  squared?: boolean
-  dot?: boolean
+  picture?: string;
+  pictureDark?: string;
+  placeholder?: string;
+  badge?: string;
+  initials?: string;
+  size?: VAvatarSize;
+  color?: VAvatarColor;
+  dotColor?: VAvatarDotColor;
+  squared?: boolean;
+  dot?: boolean;
 }
 
 const props = withDefaults(defineProps<VAvatarProps>(), {
@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<VAvatarProps>(), {
   size: undefined,
   color: undefined,
   dotColor: undefined,
-})
+});
 </script>
 
 <template>

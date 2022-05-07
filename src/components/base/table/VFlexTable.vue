@@ -1,66 +1,66 @@
 <script setup lang="ts">
-import type { VNode } from 'vue'
-import { toRaw, computed, reactive, isReactive, inject } from 'vue'
+import type { VNode } from 'vue';
+import { toRaw, computed, reactive, isReactive, inject } from 'vue';
 
-import { flewTableWrapperSymbol } from './VFlexTableWrapper.vue'
+import { flewTableWrapperSymbol } from './VFlexTableWrapper.vue';
 
 export interface VFlexTableColumn {
-  key: string
-  label: string
-  format: (value: any, row: any, index: number) => any
-  renderHeader?: () => VNode
-  renderRow?: (row: any, column: VFlexTableColumn, index: number) => VNode
-  align?: 'start' | 'center' | 'end'
-  bold?: boolean
-  inverted?: boolean
-  scrollX?: boolean
-  scrollY?: boolean
-  grow?: boolean | 'lg' | 'xl'
-  media?: boolean
-  cellClass?: string
+  key: string;
+  label: string;
+  format: (value: any, row: any, index: number) => any;
+  renderHeader?: () => VNode;
+  renderRow?: (row: any, column: VFlexTableColumn, index: number) => VNode;
+  align?: 'start' | 'center' | 'end';
+  bold?: boolean;
+  inverted?: boolean;
+  scrollX?: boolean;
+  scrollY?: boolean;
+  grow?: boolean | 'lg' | 'xl';
+  media?: boolean;
+  cellClass?: string;
 }
 
 export interface VFlexTableProps {
-  data?: any[]
-  columns?: Record<string, string | Partial<VFlexTableColumn>>
-  printObjects?: boolean
-  reactive?: boolean
-  compact?: boolean
-  rounded?: boolean
-  separators?: boolean
-  clickable?: boolean
-  subtable?: boolean
-  noHeader?: boolean
+  data?: any[];
+  columns?: Record<string, string | Partial<VFlexTableColumn>>;
+  printObjects?: boolean;
+  reactive?: boolean;
+  compact?: boolean;
+  rounded?: boolean;
+  separators?: boolean;
+  clickable?: boolean;
+  subtable?: boolean;
+  noHeader?: boolean;
 }
 
 const emits = defineEmits<{
-  (e: 'rowClick', row: any, index: number): void
-}>()
+  (e: 'rowClick', row: any, index: number): void;
+}>();
 const props = withDefaults(defineProps<VFlexTableProps>(), {
   columns: undefined,
   data: () => [],
-})
+});
 
-const wrapper = inject(flewTableWrapperSymbol, null)
+const wrapper = inject(flewTableWrapperSymbol, null);
 
 const data = computed(() => {
-  if (wrapper?.data) return wrapper.data
+  if (wrapper?.data) return wrapper.data;
 
   if (props.reactive) {
     if (isReactive(props.data)) {
-      return props.data
+      return props.data;
     } else {
-      return reactive(props.data)
+      return reactive(props.data);
     }
   }
 
-  return toRaw(props.data)
-})
+  return toRaw(props.data);
+});
 
-const defaultFormatter = (value: any) => value
+const defaultFormatter = (value: any) => value;
 const columns = computed(() => {
-  const columnsSrc = wrapper?.columns ?? props.columns
-  let columns: VFlexTableColumn[] = []
+  const columnsSrc = wrapper?.columns ?? props.columns;
+  let columns: VFlexTableColumn[] = [];
 
   if (columnsSrc) {
     for (const [key, label] of Object.entries(columnsSrc)) {
@@ -69,14 +69,14 @@ const columns = computed(() => {
           format: defaultFormatter,
           label,
           key,
-        })
+        });
       } else {
         columns.push({
           format: defaultFormatter,
           label: key,
           key,
           ...(label as any),
-        })
+        });
       }
     }
   } else if (data.value.length > 0) {
@@ -85,12 +85,12 @@ const columns = computed(() => {
         format: defaultFormatter,
         label: key,
         key,
-      })
+      });
     }
   }
 
-  return columns
-})
+  return columns;
+});
 </script>
 
 <template>
@@ -144,12 +144,12 @@ const columns = computed(() => {
           :tabindex="props.clickable ? 0 : undefined"
           @keydown.space.prevent="
             () => {
-              props.clickable && emits('rowClick', row, index)
+              props.clickable && emits('rowClick', row, index);
             }
           "
           @click="
             () => {
-              props.clickable && emits('rowClick', row, index)
+              props.clickable && emits('rowClick', row, index);
             }
           "
         >

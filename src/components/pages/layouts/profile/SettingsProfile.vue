@@ -1,19 +1,21 @@
 <script lang="ts">
-import { useUserSession } from '/@src/stores/userSession'
+import { useUserSession } from '/@src/stores/userSession';
 
+/* eslint-disable */
 const userSession = useUserSession();
 </script>
 <template>
   <div class="profile-wrapper">
     <div class="profile-header has-text-centered">
-      <VAvatar size="xl" picture="/images/avatars/svg/vuero-1.svg"
-        badge="/images/icons/flags/united-states-of-america.svg" />
+      <VAvatar
+        size="xl"
+        picture="/images/avatars/svg/vuero-1.svg"
+        badge="/images/icons/flags/united-states-of-america.svg"
+      />
 
       <h3 class="title is-4 is-narrow">{{ userSession?.user?.username }}</h3>
-      <p class="light-text">
-        Welcome to the beginning
-      </p>
-      <div class="profile-stats">
+      <p class="light-text">Welcome to the beginning</p>
+      <!-- <div class="profile-stats">
         <div class="profile-stat">
           <i aria-hidden="true" class="lnil lnil-users-alt"></i>
           <span>7+ billion Relations</span>
@@ -29,7 +31,7 @@ const userSession = useUserSession();
           <a><i aria-hidden="true" class="fab fa-twitter"></i></a>
           <a><i aria-hidden="true" class="fab fa-linkedin-in"></i></a>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="profile-body">

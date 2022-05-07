@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 export type SidebarTheme =
   | 'default'
@@ -8,36 +8,36 @@ export type SidebarTheme =
   | 'curved'
   | 'float'
   | 'labels'
-  | 'labels-hover'
+  | 'labels-hover';
 
 const props = withDefaults(
   defineProps<{
-    theme?: SidebarTheme
-    isOpen?: boolean
+    theme?: SidebarTheme;
+    isOpen?: boolean;
   }>(),
   {
     theme: 'default',
   }
-)
+);
 
 const themeClasses = computed(() => {
   switch (props.theme) {
     case 'color':
-      return 'is-colored'
+      return 'is-colored';
     case 'labels':
-      return 'has-labels'
+      return 'has-labels';
     case 'labels-hover':
-      return 'has-labels has-hover-labels'
+      return 'has-labels has-hover-labels';
     case 'float':
-      return !props.isOpen ? 'is-float' : 'is-float is-bordered'
+      return !props.isOpen ? 'is-float' : 'is-float is-bordered';
     case 'curved':
-      return !props.isOpen ? 'is-curved' : ''
+      return !props.isOpen ? 'is-curved' : '';
     case 'color-curved':
-      return !props.isOpen ? 'is-colored is-curved' : 'is-colored'
+      return !props.isOpen ? 'is-colored is-curved' : 'is-colored';
     default:
-      return ''
+      return '';
   }
-})
+});
 </script>
 
 <template>

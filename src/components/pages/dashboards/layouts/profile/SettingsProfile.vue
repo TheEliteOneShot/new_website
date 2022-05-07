@@ -1,14 +1,6 @@
-<script setup lang="ts">
-import { useUserSession } from '/@src/stores/userSession'
-
-const userSession = useUserSession();
-const username = userSession?.user?.username;
-
-</script>
-
 <template>
   <div class="profile-wrapper">
-    <div class="profile-header has-text-centered">
+    <!-- <div class="profile-header has-text-centered">
       <VAvatar size="xl" picture="/images/avatars/svg/vuero-1.svg"
         badge="/images/icons/flags/united-states-of-america.svg" />
 
@@ -33,7 +25,7 @@ const username = userSession?.user?.username;
           <a><i aria-hidden="true" class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="profile-body">
       <div class="settings-section">

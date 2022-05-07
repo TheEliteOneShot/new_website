@@ -12,26 +12,26 @@ export type VTagColor =
   | 'purple'
   | 'white'
   | 'light'
-  | 'solid'
+  | 'solid';
 
-export type VTagSize = 'tiny'
+export type VTagSize = 'tiny';
 
 export interface VTagProps {
-  label?: string | number
-  color?: VTagColor
-  size?: VTagSize
-  rounded?: boolean
-  curved?: boolean
-  outlined?: boolean
-  elevated?: boolean
-  remove?: boolean
+  label?: string | number;
+  color?: VTagColor;
+  size?: VTagSize;
+  rounded?: boolean;
+  curved?: boolean;
+  outlined?: boolean;
+  elevated?: boolean;
+  remove?: boolean;
 }
 
 const props = withDefaults(defineProps<VTagProps>(), {
   label: undefined,
   color: undefined,
   size: undefined,
-})
+});
 </script>
 
 <template>

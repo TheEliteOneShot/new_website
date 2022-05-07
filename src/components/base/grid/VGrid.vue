@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
-export type VGridJustifyItems = 'start' | 'end' | 'center' | 'stretch' | 'initial'
-export type VGridAlignItems = 'start' | 'end' | 'center' | 'stretch' | 'initial'
+export type VGridJustifyItems = 'start' | 'end' | 'center' | 'stretch' | 'initial';
+export type VGridAlignItems = 'start' | 'end' | 'center' | 'stretch' | 'initial';
 export type VGridJustifyContent =
   | 'start'
   | 'end'
@@ -11,7 +11,7 @@ export type VGridJustifyContent =
   | 'space-around'
   | 'space-between'
   | 'space-evenly'
-  | 'initial'
+  | 'initial';
 export type VGridAlignContent =
   | 'start'
   | 'end'
@@ -20,24 +20,24 @@ export type VGridAlignContent =
   | 'space-around'
   | 'space-between'
   | 'space-evenly'
-  | 'initial'
-export type VGridAutoFlow = 'row' | 'column' | 'row dense' | 'column dense' | 'initial'
+  | 'initial';
+export type VGridAutoFlow = 'row' | 'column' | 'row dense' | 'column dense' | 'initial';
 
 export interface VGridProps {
-  inline?: boolean
-  gridTemplateColumns?: string
-  gridTemplateRows?: string
-  gridTemplateAreas?: string
-  columnGap?: string
-  rowGap?: string
-  justifyItems?: VGridJustifyItems
-  alignItems?: VGridAlignItems
-  justifyContent?: VGridJustifyContent
-  alignContent?: VGridAlignContent
-  placeContent?: string
-  gridAutoColumns?: string
-  gridAutoRows?: string
-  gridAutoFlow?: VGridAutoFlow
+  inline?: boolean;
+  gridTemplateColumns?: string;
+  gridTemplateRows?: string;
+  gridTemplateAreas?: string;
+  columnGap?: string;
+  rowGap?: string;
+  justifyItems?: VGridJustifyItems;
+  alignItems?: VGridAlignItems;
+  justifyContent?: VGridJustifyContent;
+  alignContent?: VGridAlignContent;
+  placeContent?: string;
+  gridAutoColumns?: string;
+  gridAutoRows?: string;
+  gridAutoFlow?: VGridAutoFlow;
 }
 const props = withDefaults(defineProps<VGridProps>(), {
   gridTemplateColumns: 'none',
@@ -53,8 +53,8 @@ const props = withDefaults(defineProps<VGridProps>(), {
   gridAutoColumns: 'auto',
   gridAutoRows: 'auto',
   gridAutoFlow: 'row',
-})
-const display = computed(() => (props.inline ? 'inline-grid' : 'grid'))
+});
+const display = computed(() => (props.inline ? 'inline-grid' : 'grid'));
 </script>
 
 <template>

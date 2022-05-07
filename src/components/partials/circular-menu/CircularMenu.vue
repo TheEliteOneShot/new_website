@@ -1,42 +1,42 @@
 <script setup lang="ts">
-import { useWindowScroll } from '@vueuse/core'
-import { computed, ref, watchEffect } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { usePanels } from '/@src/stores/panels'
+import { useWindowScroll } from '@vueuse/core';
+import { computed, ref, watchEffect } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { usePanels } from '/@src/stores/panels';
 
-import { useDarkmode } from '/@src/stores/darkmode'
-const darkmode = useDarkmode()
-const panels = usePanels()
-const { locale } = useI18n()
-const { y } = useWindowScroll()
-const isOpen = ref(false)
-const isScrolling = ref(false)
+import { useDarkmode } from '/@src/stores/darkmode';
+const darkmode = useDarkmode();
+const panels = usePanels();
+const { locale } = useI18n();
+const { y } = useWindowScroll();
+const isOpen = ref(false);
+const isScrolling = ref(false);
 
 watchEffect(() => {
   if (y.value <= 30) {
-    isOpen.value = false
+    isOpen.value = false;
   }
 
-  isScrolling.value = y.value > 30
-})
+  isScrolling.value = y.value > 30;
+});
 
 const localFlagSrc = computed(() => {
   switch (locale.value) {
     case 'fr':
-      return '/images/icons/flags/france.svg'
+      return '/images/icons/flags/france.svg';
     case 'es':
-      return '/images/icons/flags/spain.svg'
+      return '/images/icons/flags/spain.svg';
     case 'es-MX':
-      return '/images/icons/flags/mexico.svg'
+      return '/images/icons/flags/mexico.svg';
     case 'de':
-      return '/images/icons/flags/germany.svg'
+      return '/images/icons/flags/germany.svg';
     case 'zh-CN':
-      return '/images/icons/flags/china.svg'
+      return '/images/icons/flags/china.svg';
     case 'en':
     default:
-      return '/images/icons/flags/united-states-of-america.svg'
+      return '/images/icons/flags/united-states-of-america.svg';
   }
-})
+});
 </script>
 
 <template>
@@ -74,10 +74,7 @@ const localFlagSrc = computed(() => {
       >
         <img :src="localFlagSrc" alt="" />
       </a>
-      <RouterLink
-        :to="{ name: 'me-profile-notifications' }"
-        class="menu-item is-flex"
-      >
+      <RouterLink :to="{ name: 'me-profile-notifications' }" class="menu-item is-flex">
         <i aria-hidden="true" class="iconify" data-icon="feather:bell"></i>
       </RouterLink>
       <a

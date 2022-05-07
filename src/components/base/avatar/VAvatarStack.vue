@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { VAvatarProps } from './VAvatar.vue'
+import { VAvatarProps } from './VAvatar.vue';
 
-export type VAvatarStackSize = 'small' | 'medium' | 'large' | 'big' | 'xl'
+export type VAvatarStackSize = 'small' | 'medium' | 'large' | 'big' | 'xl';
 
 export interface VAvatarStackProps {
-  limit?: number
-  size?: VAvatarStackSize
-  avatars?: VAvatarProps[]
+  limit?: number;
+  size?: VAvatarStackSize;
+  avatars?: VAvatarProps[];
 }
 
 const props = withDefaults(defineProps<VAvatarStackProps>(), {
   limit: 5,
   size: undefined,
   avatars: () => [],
-})
+});
 </script>
 
 <template>

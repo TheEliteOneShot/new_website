@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useViewWrapper } from '/@src/stores/viewWrapper'
+import { useViewWrapper } from '/@src/stores/viewWrapper';
 
 export interface VViewWrapperProps {
-  topNav?: boolean
-  full?: boolean
+  topNav?: boolean;
+  full?: boolean;
 }
 
-const viewWrapper = useViewWrapper()
-const props = defineProps<VViewWrapperProps>()
+const viewWrapper = useViewWrapper();
+const props = defineProps<VViewWrapperProps>();
 </script>
 
 <template>

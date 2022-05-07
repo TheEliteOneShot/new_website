@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import { ref, watchPostEffect, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, watchPostEffect, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-import type { SidebarTheme } from '/@src/components/navigation/desktop/Sidebar.vue'
-import { useViewWrapper } from '/@src/stores/viewWrapper'
+import type { SidebarTheme } from '/@src/components/navigation/desktop/Sidebar.vue';
+import { useViewWrapper } from '/@src/stores/viewWrapper';
 
 const props = withDefaults(
   defineProps<{
-    theme?: SidebarTheme
-    defaultSidebar?: string
-    closeOnChange?: boolean
-    openOnMounted?: boolean
-    nowrap?: boolean
+    theme?: SidebarTheme;
+    defaultSidebar?: string;
+    closeOnChange?: boolean;
+    openOnMounted?: boolean;
+    nowrap?: boolean;
   }>(),
   {
     defaultSidebar: 'dashboard',
     theme: 'default',
   }
-)
+);
 
-const viewWrapper = useViewWrapper()
-const route = useRoute()
-const isMobileSidebarOpen = ref(false)
-const isDesktopSidebarOpen = ref(props.openOnMounted)
-const activeMobileSubsidebar = ref(props.defaultSidebar)
+const viewWrapper = useViewWrapper();
+const route = useRoute();
+const isMobileSidebarOpen = ref(false);
+const isDesktopSidebarOpen = ref(props.openOnMounted);
+const activeMobileSubsidebar = ref(props.defaultSidebar);
 
 function switchSidebar(id: string) {
   if (id === activeMobileSubsidebar.value) {
-    isDesktopSidebarOpen.value = !isDesktopSidebarOpen.value
+    isDesktopSidebarOpen.value = !isDesktopSidebarOpen.value;
   } else {
-    isDesktopSidebarOpen.value = true
-    activeMobileSubsidebar.value = id
+    isDesktopSidebarOpen.value = true;
+    activeMobileSubsidebar.value = id;
   }
 }
 
@@ -38,18 +38,18 @@ function switchSidebar(id: string) {
  * watchPostEffect callback will be executed each time dependent reactive values has changed
  */
 watchPostEffect(() => {
-  viewWrapper.setPushed(isDesktopSidebarOpen.value ?? false)
-})
+  viewWrapper.setPushed(isDesktopSidebarOpen.value ?? false);
+});
 watch(
   () => route.fullPath,
   () => {
-    isMobileSidebarOpen.value = false
+    isMobileSidebarOpen.value = false;
 
     if (props.closeOnChange && isDesktopSidebarOpen.value) {
-      isDesktopSidebarOpen.value = false
+      isDesktopSidebarOpen.value = false;
     }
   }
-)
+);
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import ApexChart from 'vue3-apexcharts'
-import { customersOptions } from '/@src/data/customersChart'
-import { teamGaugeOptions } from '/@src/data/teamGaugeChart'
-import { profitChartOptions } from '/@src/data/profitChart'
-import { useUserSession } from '/@src/stores/userSession'
+import ApexChart from 'vue3-apexcharts';
+import { customersOptions } from '/@src/data/customersChart';
+import { teamGaugeOptions } from '/@src/data/teamGaugeChart';
+import { profitChartOptions } from '/@src/data/profitChart';
+import { useUserSession } from '/@src/stores/userSession';
 
 const userSession = useUserSession();
 </script>
@@ -36,7 +36,13 @@ const userSession = useUserSession();
               <div class="quick-stats-inner">
                 <!--Stat-->
                 <div class="quick-stat">
-                  <VBlock title="2,870" subtitle="Sales this month" center m-responsive t-responsive>
+                  <VBlock
+                    title="2,870"
+                    subtitle="Sales this month"
+                    center
+                    m-responsive
+                    t-responsive
+                  >
                     <template #icon>
                       <VIconBox color="purple" rounded>
                         <i aria-hidden="true" class="lnil lnil-analytics-alt-1"></i>
@@ -47,7 +53,13 @@ const userSession = useUserSession();
 
                 <!--Stat-->
                 <div class="quick-stat">
-                  <VBlock title="131" subtitle="New users" center m-responsive t-responsive>
+                  <VBlock
+                    title="131"
+                    subtitle="New users"
+                    center
+                    m-responsive
+                    t-responsive
+                  >
                     <template #icon>
                       <VIconBox color="orange" rounded>
                         <i aria-hidden="true" class="lnil lnil-handshake"></i>
@@ -58,7 +70,13 @@ const userSession = useUserSession();
 
                 <!--Stat-->
                 <div class="quick-stat">
-                  <VBlock title="$398,49" subtitle="Earned today" center m-responsive t-responsive>
+                  <VBlock
+                    title="$398,49"
+                    subtitle="Earned today"
+                    center
+                    m-responsive
+                    t-responsive
+                  >
                     <template #icon>
                       <VIconBox color="green" rounded>
                         <i aria-hidden="true" class="lnil lnil-diamond-alt"></i>
@@ -69,7 +87,13 @@ const userSession = useUserSession();
 
                 <!--Stat-->
                 <div class="quick-stat">
-                  <VBlock title="$6542,31" subtitle="Total balance" center m-responsive t-responsive>
+                  <VBlock
+                    title="$6542,31"
+                    subtitle="Total balance"
+                    center
+                    m-responsive
+                    t-responsive
+                  >
                     <template #icon>
                       <VIconBox color="info" rounded>
                         <i aria-hidden="true" class="lnil lnil-bank"></i>
@@ -85,8 +109,12 @@ const userSession = useUserSession();
         <!--Card-->
         <div class="column is-6">
           <div class="dashboard-card">
-            <ApexChart :height="customersOptions.chart.height" :type="customersOptions.chart.type"
-              :series="customersOptions.series" :options="customersOptions">
+            <ApexChart
+              :height="customersOptions.chart.height"
+              :type="customersOptions.chart.type"
+              :series="customersOptions.series"
+              :options="customersOptions"
+            >
             </ApexChart>
           </div>
         </div>
@@ -107,12 +135,16 @@ const userSession = useUserSession();
         <div class="column is-4">
           <div class="dashboard-card is-gauge">
             <div class="people">
-              <VAvatar picture="/demo/avatars/21.jpg" />
+              <VAvatar picture="/images/avatars/placeholder.jpg" />
               <VAvatar initials="SC" color="h-purple" />
-              <VAvatar picture="/demo/avatars/39.jpg" />
+              <VAvatar picture="/images/avatars/placeholder.jpg" />
             </div>
-            <ApexChart :height="teamGaugeOptions.chart.height" :type="teamGaugeOptions.chart.type"
-              :series="teamGaugeOptions.series" :options="teamGaugeOptions">
+            <ApexChart
+              :height="teamGaugeOptions.chart.height"
+              :type="teamGaugeOptions.chart.type"
+              :series="teamGaugeOptions.series"
+              :options="teamGaugeOptions"
+            >
             </ApexChart>
           </div>
         </div>
@@ -120,8 +152,12 @@ const userSession = useUserSession();
         <!--Card-->
         <div class="column is-4">
           <div class="dashboard-card">
-            <ApexChart :height="profitChartOptions.chart.height" :type="profitChartOptions.chart.type"
-              :series="profitChartOptions.series" :options="profitChartOptions">
+            <ApexChart
+              :height="profitChartOptions.chart.height"
+              :type="profitChartOptions.chart.type"
+              :series="profitChartOptions.series"
+              :options="profitChartOptions"
+            >
             </ApexChart>
           </div>
         </div>
@@ -174,7 +210,7 @@ const userSession = useUserSession();
 
       font-family: var(--font);
 
-      >h4,
+      > h4,
       .ApexCharts-title-text {
         font-family: var(--font-alt);
         font-size: 1rem;

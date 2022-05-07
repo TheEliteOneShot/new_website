@@ -1,5 +1,5 @@
-import { definePlugin } from '/@src/app'
-import { defineAsyncComponent } from 'vue'
+import { definePlugin } from '/@src/app';
+import { defineAsyncComponent } from 'vue';
 
 export default definePlugin(({ app }) => {
   // here we are defining a lazy loaded component
@@ -12,7 +12,7 @@ export default definePlugin(({ app }) => {
       delay: 0,
       suspensible: false,
     })
-  )
+  );
 
   app.component(
     // eslint-disable-next-line vue/multi-word-component-names
@@ -22,5 +22,5 @@ export default definePlugin(({ app }) => {
       delay: 0,
       suspensible: false,
     })
-  )
-})
+  );
+});

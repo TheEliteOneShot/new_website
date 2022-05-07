@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const emit = defineEmits<{
-  (e: 'toggle'): void
-}>()
+  (e: 'toggle'): void;
+}>();
 const props = defineProps<{
-  isOpen?: boolean
-}>()
+  isOpen?: boolean;
+}>();
 </script>
 
 <template>

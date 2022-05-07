@@ -1,16 +1,16 @@
 <script setup lang="ts">
-export type VActionDark = '1' | '2' | '3' | '4' | '5' | '6'
+export type VActionDark = '1' | '2' | '3' | '4' | '5' | '6';
 export interface VActionProps {
-  dark?: VActionDark
-  active?: boolean
-  rounded?: boolean
-  hoverable?: boolean
-  grey?: boolean
+  dark?: VActionDark;
+  active?: boolean;
+  rounded?: boolean;
+  hoverable?: boolean;
+  grey?: boolean;
 }
 
 const props = withDefaults(defineProps<VActionProps>(), {
   dark: undefined,
-})
+});
 </script>
 
 <template>

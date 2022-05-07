@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-import { useDropdown } from '/@src/composable/useDropdown'
-import { onceImageErrored } from '/@src/utils/via-placeholder'
+import { useDropdown } from '/@src/composable/useDropdown';
+import { onceImageErrored } from '/@src/utils/via-placeholder';
 
-const dropdownElement = ref<HTMLElement>()
-const dropdown = useDropdown(dropdownElement)
+const dropdownElement = ref<HTMLElement>();
+const dropdown = useDropdown(dropdownElement);
 </script>
 
 <template>
@@ -46,7 +46,7 @@ const dropdown = useDropdown(dropdownElement)
                   <img
                     class="user-photo"
                     alt=""
-                    src="/demo/avatars/7.jpg"
+                    src="/images/avatars/placeholder.jpg"
                     @error.once="(event) => onceImageErrored(event, '150x150')"
                   />
                 </div>
@@ -64,7 +64,7 @@ const dropdown = useDropdown(dropdownElement)
                   <img
                     class="user-photo"
                     alt=""
-                    src="/demo/avatars/12.jpg"
+                    src="/images/avatars/placeholder.jpg"
                     @error.once="(event) => onceImageErrored(event, '150x150')"
                   />
                 </div>
@@ -82,7 +82,7 @@ const dropdown = useDropdown(dropdownElement)
                   <img
                     class="user-photo"
                     alt=""
-                    src="/demo/avatars/13.jpg"
+                    src="/images/avatars/placeholder.jpg"
                     @error.once="(event) => onceImageErrored(event, '150x150')"
                   />
                 </div>
@@ -100,7 +100,7 @@ const dropdown = useDropdown(dropdownElement)
                   <img
                     class="user-photo"
                     alt=""
-                    src="/demo/avatars/25.jpg"
+                    src="/images/avatars/placeholder.jpg"
                     @error.once="(event) => onceImageErrored(event, '150x150')"
                   />
                 </div>

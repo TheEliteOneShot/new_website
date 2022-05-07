@@ -1,14 +1,14 @@
 <script setup lang="ts">
-export type LandingLayoutTheme = 'darker' | 'light'
+export type LandingLayoutTheme = 'darker' | 'light';
 
 const props = withDefaults(
   defineProps<{
-    theme?: LandingLayoutTheme
+    theme?: LandingLayoutTheme;
   }>(),
   {
     theme: 'darker',
   }
-)
+);
 </script>
 
 <template>

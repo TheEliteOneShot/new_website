@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { useWindowScroll } from '@vueuse/core'
-import { computed, ref } from 'vue'
-import { useNotyf } from '/@src/composable/useNotyf'
-import sleep from '/@src/utils/sleep'
+import { useWindowScroll } from '@vueuse/core';
+import { computed, ref } from 'vue';
+import { useNotyf } from '/@src/composable/useNotyf';
+import sleep from '/@src/utils/sleep';
 
-const notyf = useNotyf()
-const { y } = useWindowScroll()
+const notyf = useNotyf();
+const { y } = useWindowScroll();
 
-const isLoading = ref(false)
-const twoFactor = ref(true)
-const notifications = ref(false)
-const notificationsLow = ref(false)
-const marketing = ref(false)
-const partners = ref(false)
+const isLoading = ref(false);
+const twoFactor = ref(true);
+const notifications = ref(false);
+const notificationsLow = ref(false);
+const marketing = ref(false);
+const partners = ref(false);
 
 const isScrolling = computed(() => {
-  return y.value > 30
-})
+  return y.value > 30;
+});
 const onSave = async () => {
-  isLoading.value = true
-  await sleep()
-  notyf.success('Your changes have been successfully saved!')
-  isLoading.value = false
-}
+  isLoading.value = true;
+  await sleep();
+  notyf.success('Your changes have been successfully saved!');
+  isLoading.value = false;
+};
 </script>
 
 <template>

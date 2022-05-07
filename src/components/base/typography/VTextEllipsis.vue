@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { CssUnitRe } from '/@src/utils/regex'
+import { CssUnitRe } from '/@src/utils/regex';
 
 export interface VTextEllipsisProps {
-  width?: string
-  mobileWidth?: string
+  width?: string;
+  mobileWidth?: string;
 }
 
 const props = withDefaults(defineProps<VTextEllipsisProps>(), {
   width: '150px',
   mobileWidth: undefined,
-})
-const mobileWidthValue = props.mobileWidth ?? props.width
+});
+const mobileWidthValue = props.mobileWidth ?? props.width;
 
 if (props.width.match(CssUnitRe) === null) {
   console.warn(
     `VTextEllipsis: invalid "${props.width}" width. Should be a valid css unit value.`
-  )
+  );
 }
 if (mobileWidthValue.match(CssUnitRe) === null) {
   console.warn(
     `VTextEllipsis: invalid "${mobileWidthValue}" mobileWidth. Should be a valid css unit value.`
-  )
+  );
 }
 </script>
 

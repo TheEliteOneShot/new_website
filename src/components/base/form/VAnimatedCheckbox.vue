@@ -1,9 +1,9 @@
 <script lang="ts">
-let instances = 0
+let instances = 0;
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue';
 
 export type VAnimatedCheckboxColor =
   | 'primary'
@@ -11,59 +11,59 @@ export type VAnimatedCheckboxColor =
   | 'success'
   | 'warning'
   | 'danger'
-  | 'purple'
+  | 'purple';
 
 export interface VAnimatedCheckboxEmits {
-  (e: 'update:modelValue', value: (string | number)[]): void
+  (e: 'update:modelValue', value: (string | number)[]): void;
 }
 export interface VAnimatedCheckboxProps {
-  value?: string | number
-  color?: VAnimatedCheckboxColor
-  modelValue?: (string | number)[]
+  value?: string | number;
+  color?: VAnimatedCheckboxColor;
+  modelValue?: (string | number)[];
 }
 
-const emit = defineEmits<VAnimatedCheckboxEmits>()
+const emit = defineEmits<VAnimatedCheckboxEmits>();
 const props = withDefaults(defineProps<VAnimatedCheckboxProps>(), {
   value: undefined,
   color: undefined,
   modelValue: () => [],
-})
+});
 
-const animatedCheckboxId = `animated-checkbox-${++instances}`
-const element = ref<HTMLElement>()
-const innerElement = ref<HTMLElement>()
-const checked = computed(() => props.modelValue.includes(props.value))
+const animatedCheckboxId = `animated-checkbox-${++instances}`;
+const element = ref<HTMLElement>();
+const innerElement = ref<HTMLElement>();
+const checked = computed(() => props.modelValue.includes(props.value));
 
 const updateCheckbox = () => {
   if (element.value && innerElement.value) {
     if (checked.value) {
-      element.value.classList.add('is-checked')
-      innerElement.value.classList.add('is-opaque')
+      element.value.classList.add('is-checked');
+      innerElement.value.classList.add('is-opaque');
       setTimeout(() => {
-        element.value?.classList.remove('is-unchecked')
-      }, 150)
+        element.value?.classList.remove('is-unchecked');
+      }, 150);
     } else {
-      element.value.classList.add('is-unchecked')
-      element.value.classList.remove('is-checked')
+      element.value.classList.add('is-unchecked');
+      element.value.classList.remove('is-checked');
       setTimeout(() => {
-        innerElement.value?.classList.remove('is-opaque')
-      }, 150)
+        innerElement.value?.classList.remove('is-opaque');
+      }, 150);
     }
   }
-}
+};
 
 function change() {
-  const values = [...props.modelValue]
+  const values = [...props.modelValue];
 
   if (checked.value) {
-    values.splice(values.indexOf(props.value), 1)
+    values.splice(values.indexOf(props.value), 1);
   } else {
-    values.push(props.value)
+    values.push(props.value);
   }
-  emit('update:modelValue', values)
+  emit('update:modelValue', values);
 }
 
-watchEffect(updateCheckbox)
+watchEffect(updateCheckbox);
 </script>
 
 <template>

@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { useSlots, computed, reactive } from 'vue'
+import { useSlots, computed, reactive } from 'vue';
 
-import { useVFieldContext } from '/@src/composable/useVFieldContext'
+import { useVFieldContext } from '/@src/composable/useVFieldContext';
 
 export type VFieldProps = {
-  id?: string
-  label?: string
-  addons?: boolean
-  textaddon?: boolean
-  grouped?: boolean
-  multiline?: boolean
-  horizontal?: boolean
-  subcontrol?: boolean
-  raw?: boolean
-}
+  id?: string;
+  label?: string;
+  addons?: boolean;
+  textaddon?: boolean;
+  grouped?: boolean;
+  multiline?: boolean;
+  horizontal?: boolean;
+  subcontrol?: boolean;
+  raw?: boolean;
+};
 
 const props = withDefaults(defineProps<VFieldProps>(), {
   id: undefined,
   label: undefined,
-})
+});
 const vFieldContext = reactive(
   useVFieldContext({ id: props.id, inherit: !props.subcontrol })
-)
+);
 
-const slots = useSlots()
-const hasLabel = computed(() => Boolean(slots?.label?.() || props.label))
+const slots = useSlots();
+const hasLabel = computed(() => Boolean(slots?.label?.() || props.label));
 const classes = computed(() => {
-  if (props.raw) return []
+  if (props.raw) return [];
 
   return [
     'field',
@@ -35,10 +35,10 @@ const classes = computed(() => {
     props.grouped && 'is-grouped',
     props.grouped && props.multiline && 'is-grouped-multiline',
     props.horizontal && 'is-horizontal',
-  ]
-})
+  ];
+});
 
-defineExpose(vFieldContext)
+defineExpose(vFieldContext);
 </script>
 
 <template>

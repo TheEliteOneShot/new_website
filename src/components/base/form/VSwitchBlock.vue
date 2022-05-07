@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import { watch, ref, useAttrs } from 'vue'
+import { watch, ref, useAttrs } from 'vue';
 
-export type VSwitchBlockColor = 'primary' | 'info' | 'success' | 'warning' | 'danger'
+export type VSwitchBlockColor = 'primary' | 'info' | 'success' | 'warning' | 'danger';
 export interface VSwitchBlockEmits {
-  (e: 'update:modelValue', value: any): void
+  (e: 'update:modelValue', value: any): void;
 }
 export interface VSwitchBlockProps {
-  modelValue?: any
-  label?: string
-  color?: VSwitchBlockColor
-  thin?: boolean
+  modelValue?: any;
+  label?: string;
+  color?: VSwitchBlockColor;
+  thin?: boolean;
 }
 
-const emit = defineEmits<VSwitchBlockEmits>()
+const emit = defineEmits<VSwitchBlockEmits>();
 const props = withDefaults(defineProps<VSwitchBlockProps>(), {
   modelValue: false,
   label: undefined,
   color: undefined,
-})
+});
 
-const value = ref(props.modelValue)
-const attrs = useAttrs()
+const value = ref(props.modelValue);
+const attrs = useAttrs();
 
 watch(value, () => {
-  emit('update:modelValue', value.value)
-})
+  emit('update:modelValue', value.value);
+});
 watch(
   () => props.modelValue,
   () => {
-    value.value = props.modelValue
+    value.value = props.modelValue;
   }
-)
+);
 </script>
 
 <template>

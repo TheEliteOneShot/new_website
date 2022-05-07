@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { useVFieldContext } from '/@src/composable/useVFieldContext'
+import { reactive } from 'vue';
+import { useVFieldContext } from '/@src/composable/useVFieldContext';
 
 const vFieldContext = reactive(
   useVFieldContext({
     create: false,
     help: 'VOption',
   })
-)
+);
 </script>
 
 <template>

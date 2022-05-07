@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, onUpdated, useSlots } from 'vue'
+import { ref, onUpdated, useSlots } from 'vue';
 
-export type VCardMediaFormat = '4by3' | '16by9'
+export type VCardMediaFormat = '4by3' | '16by9';
 export interface VCardMediaProps {
-  title: string
-  subtitle?: string
-  image?: string
-  avatar?: string
-  badge?: string
-  placeholder?: string
-  format?: VCardMediaFormat
+  title: string;
+  subtitle?: string;
+  image?: string;
+  avatar?: string;
+  badge?: string;
+  placeholder?: string;
+  format?: VCardMediaFormat;
 }
 
 const props = withDefaults(defineProps<VCardMediaProps>(), {
@@ -19,19 +19,19 @@ const props = withDefaults(defineProps<VCardMediaProps>(), {
   badge: undefined,
   placeholder: 'https://via.placeholder.com/1280x960',
   format: '4by3',
-})
+});
 
-const slots = useSlots()
-const hasDefaultSlot = ref(!!slots.default?.())
+const slots = useSlots();
+const hasDefaultSlot = ref(!!slots.default?.());
 
 function placeholderHandler(event: Event) {
-  const target = event.target as HTMLImageElement
-  target.src = props.placeholder
+  const target = event.target as HTMLImageElement;
+  target.src = props.placeholder;
 }
 
 onUpdated(() => {
-  hasDefaultSlot.value = !!slots.default?.()
-})
+  hasDefaultSlot.value = !!slots.default?.();
+});
 </script>
 
 <template>

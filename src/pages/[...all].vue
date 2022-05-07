@@ -15,13 +15,13 @@ meta:
  * @see /src/router.ts
  */
 
-import { useHead } from '@vueuse/head'
-import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { useI18n } from 'vue-i18n'
+import { useHead } from '@vueuse/head';
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
-const route = useRoute()
-const { t } = useI18n()
+const route = useRoute();
+const { t } = useI18n();
 
 onMounted(() => {
   /**
@@ -31,9 +31,9 @@ onMounted(() => {
    * @see /src/nginx/vuejs.conf
    */
   if (!route.path.startsWith('/404')) {
-    window.location.href = `/404${route.fullPath}`
+    window.location.href = `/404${route.fullPath}`;
   }
-})
+});
 
 useHead({
   title: `${t('page-title')} - Vuero`,
@@ -43,7 +43,7 @@ useHead({
       content: 'noindex',
     },
   ],
-})
+});
 </script>
 
 <i18n lang="yaml">

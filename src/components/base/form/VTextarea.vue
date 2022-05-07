@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { ref, watch, reactive, computed } from 'vue'
-import { useVFieldContext } from '/@src/composable/useVFieldContext'
+import { ref, watch, reactive, computed } from 'vue';
+import { useVFieldContext } from '/@src/composable/useVFieldContext';
 
 export interface VTextareaEmits {
-  (event: 'update:modelValue', value?: any): void
+  (event: 'update:modelValue', value?: any): void;
 }
 export interface VTextareaProps {
-  raw?: boolean
-  modelValue?: any
+  raw?: boolean;
+  modelValue?: any;
 }
 const vFieldContext = reactive(
   useVFieldContext({
     create: false,
     help: 'VTextarea',
   })
-)
+);
 
-const emits = defineEmits<VTextareaEmits>()
-const props = withDefaults(defineProps<VTextareaProps>(), { modelValue: '' })
-const value = ref(vFieldContext?.field?.value ?? props.modelValue)
+const emits = defineEmits<VTextareaEmits>();
+const props = withDefaults(defineProps<VTextareaProps>(), { modelValue: '' });
+const value = ref(vFieldContext?.field?.value ?? props.modelValue);
 
 watch(value, () => {
-  emits('update:modelValue', value.value)
-})
+  emits('update:modelValue', value.value);
+});
 watch(
   () => props.modelValue,
   () => {
-    value.value = props.modelValue
+    value.value = props.modelValue;
   }
-)
+);
 
 const classes = computed(() => {
-  if (props.raw) return []
+  if (props.raw) return [];
 
-  return ['textarea']
-})
+  return ['textarea'];
+});
 </script>
 
 <template>

@@ -7,8 +7,8 @@
  * @see /src/pages/sidebar-blank-page-1.vue
  */
 
-import { ref } from 'vue'
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import { ref } from 'vue';
+import { acceptHMRUpdate, defineStore } from 'pinia';
 
 export type SidebarId =
   | 'none'
@@ -16,24 +16,24 @@ export type SidebarId =
   | 'layouts'
   | 'home'
   | 'components'
-  | 'elements'
+  | 'elements';
 
 export const useSidebar = defineStore('sidebar', () => {
-  const active = ref<SidebarId>('none')
+  const active = ref<SidebarId>('none');
 
   function toggle(sidebarId: SidebarId) {
     if (active.value === sidebarId) {
-      active.value = 'none'
+      active.value = 'none';
     } else {
-      active.value = sidebarId
+      active.value = sidebarId;
     }
   }
   function setActive(sidebarId: SidebarId) {
-    active.value = sidebarId
+    active.value = sidebarId;
   }
 
   function close() {
-    active.value = 'none'
+    active.value = 'none';
   }
 
   return {
@@ -41,8 +41,8 @@ export const useSidebar = defineStore('sidebar', () => {
     toggle,
     setActive,
     close,
-  } as const
-})
+  } as const;
+});
 
 /**
  * Pinia supports Hot Module replacement so you can edit your stores and
@@ -52,5 +52,5 @@ export const useSidebar = defineStore('sidebar', () => {
  * @see https://vitejs.dev/guide/api-hmr.html
  */
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useSidebar, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useSidebar, import.meta.hot));
 }

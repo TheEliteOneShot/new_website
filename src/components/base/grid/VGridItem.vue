@@ -1,15 +1,15 @@
 <script setup lang="ts">
-export type VGridJustifySelf = 'start' | 'end' | 'center' | 'stretch' | 'auto'
-export type VGridAlignSelf = 'start' | 'end' | 'center' | 'stretch' | 'auto'
+export type VGridJustifySelf = 'start' | 'end' | 'center' | 'stretch' | 'auto';
+export type VGridAlignSelf = 'start' | 'end' | 'center' | 'stretch' | 'auto';
 
 export interface VGridItemProps {
-  gridColumnStart?: string | number
-  gridColumnEnd?: string | number
-  gridRowStart?: string | number
-  gridRowEnd?: string | number
-  justifySelf?: VGridJustifySelf
-  alignSelf?: VGridAlignSelf
-  placeSelf?: string
+  gridColumnStart?: string | number;
+  gridColumnEnd?: string | number;
+  gridRowStart?: string | number;
+  gridRowEnd?: string | number;
+  justifySelf?: VGridJustifySelf;
+  alignSelf?: VGridAlignSelf;
+  placeSelf?: string;
 }
 
 const props = withDefaults(defineProps<VGridItemProps>(), {
@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<VGridItemProps>(), {
   justifySelf: 'auto',
   alignSelf: 'auto',
   placeSelf: 'auto',
-})
+});
 </script>
 
 <template>

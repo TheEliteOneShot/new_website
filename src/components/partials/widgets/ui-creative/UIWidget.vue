@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-  straight?: boolean
-}>()
+  straight?: boolean;
+}>();
 </script>
 
 <template>

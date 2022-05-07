@@ -1,24 +1,24 @@
 <script setup lang="ts">
 export interface VAccordionImageItem {
-  title: string
-  content: string
-  image: string
+  title: string;
+  content: string;
+  image: string;
 }
 export interface VAccordionImageEmits {
-  (e: 'select', key: string | number): void
+  (e: 'select', key: string | number): void;
 }
 export interface VAccordionImageProps {
-  items: VAccordionImageItem[]
+  items: VAccordionImageItem[];
 }
 
-const emit = defineEmits<VAccordionImageEmits>()
+const emit = defineEmits<VAccordionImageEmits>();
 const props = withDefaults(defineProps<VAccordionImageProps>(), {
   items: () => [],
-})
+});
 
 const toggle = (key: number) => {
-  emit('select', key)
-}
+  emit('select', key);
+};
 </script>
 
 <template>

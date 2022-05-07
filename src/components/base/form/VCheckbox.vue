@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { ref, reactive, watch, computed } from 'vue'
-import { useVFieldContext } from '/@src/composable/useVFieldContext'
+import { ref, reactive, watch, computed } from 'vue';
+import { useVFieldContext } from '/@src/composable/useVFieldContext';
 
-export type VCheckboxColor = 'primary' | 'info' | 'success' | 'warning' | 'danger'
+export type VCheckboxColor = 'primary' | 'info' | 'success' | 'warning' | 'danger';
 export interface VCheckboxEmits {
-  (e: 'update:modelValue', value: string | number | boolean): void
+  (e: 'update:modelValue', value: string | number | boolean): void;
 }
 export interface VCheckboxProps {
-  raw?: boolean
-  label?: string
-  color?: VCheckboxColor
-  trueValue?: string | number | boolean
-  falseValue?: string | number | boolean
-  modelValue?: any
-  circle?: boolean
-  solid?: boolean
-  paddingless?: boolean
-  wrapperClass?: string
+  raw?: boolean;
+  label?: string;
+  color?: VCheckboxColor;
+  trueValue?: string | number | boolean;
+  falseValue?: string | number | boolean;
+  modelValue?: any;
+  circle?: boolean;
+  solid?: boolean;
+  paddingless?: boolean;
+  wrapperClass?: string;
 }
 
-const emits = defineEmits<VCheckboxEmits>()
+const emits = defineEmits<VCheckboxEmits>();
 const props = withDefaults(defineProps<VCheckboxProps>(), {
   label: undefined,
   color: undefined,
@@ -30,13 +30,13 @@ const props = withDefaults(defineProps<VCheckboxProps>(), {
   solid: false,
   paddingless: false,
   wrapperClass: undefined,
-})
+});
 
-const vFieldContext = reactive(useVFieldContext())
-const $value = ref((vFieldContext.field?.value ?? props.modelValue) as any)
+const vFieldContext = reactive(useVFieldContext());
+const $value = ref((vFieldContext.field?.value ?? props.modelValue) as any);
 
 const classes = computed(() => {
-  if (props.raw) return [props.wrapperClass]
+  if (props.raw) return [props.wrapperClass];
 
   return [
     'checkbox',
@@ -45,18 +45,18 @@ const classes = computed(() => {
     props.circle && 'is-circle',
     props.color && `is-${props.color}`,
     props.paddingless && 'is-paddingless',
-  ]
-})
+  ];
+});
 
 watch($value, () => {
-  emits('update:modelValue', $value.value)
-})
+  emits('update:modelValue', $value.value);
+});
 watch(
   () => props.modelValue,
   () => {
-    $value.value = props.modelValue
+    $value.value = props.modelValue;
   }
-)
+);
 </script>
 
 <template>

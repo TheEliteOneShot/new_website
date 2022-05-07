@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
-export type SideblockTheme = 'default' | 'curved' | 'color' | 'color-curved'
+export type SideblockTheme = 'default' | 'curved' | 'color' | 'color-curved';
 
 const props = withDefaults(
   defineProps<{
-    theme?: SideblockTheme
-    isOpen?: boolean
+    theme?: SideblockTheme;
+    isOpen?: boolean;
   }>(),
   {
     theme: 'default',
   }
-)
+);
 
 const themeClasses = computed(() => {
   switch (props.theme) {
     case 'color':
-      return 'is-colored'
+      return 'is-colored';
     case 'curved':
-      return 'is-curved'
+      return 'is-curved';
     case 'color-curved':
-      return 'is-colored is-curved'
+      return 'is-colored is-curved';
     default:
-      return ''
+      return '';
   }
-})
+});
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script lang="ts">
-import Vivus from 'vivus'
-import { defineComponent, h, ref, watchEffect } from 'vue'
+import Vivus from 'vivus';
+import { defineComponent, h, ref, watchEffect } from 'vue';
 
 export default defineComponent({
   props: {
@@ -11,18 +11,18 @@ export default defineComponent({
   },
   emits: ['ready'],
   setup(props, { emit }) {
-    const element = ref<HTMLElement>()
+    const element = ref<HTMLElement>();
 
     watchEffect(() => {
       if (element.value) {
         new Vivus(element.value, props.options, (vivus: any) => {
-          console.log(vivus)
-          emit('ready', vivus)
-        })
+          console.log(vivus);
+          emit('ready', vivus);
+        });
       }
-    })
+    });
 
-    return () => h('div', { ref: element, class: 'vivus-svg' })
+    return () => h('div', { ref: element, class: 'vivus-svg' });
   },
-})
+});
 </script>

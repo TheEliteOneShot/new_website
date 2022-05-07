@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useWindowScroll } from '@vueuse/core'
+import { computed } from 'vue';
+import { useWindowScroll } from '@vueuse/core';
 
-export type NavbarTheme = 'default' | 'colored' | 'fade'
+export type NavbarTheme = 'default' | 'colored' | 'fade';
 
 const props = withDefaults(
   defineProps<{
-    theme?: NavbarTheme
+    theme?: NavbarTheme;
   }>(),
   {
     theme: 'default',
   }
-)
+);
 
-const { y } = useWindowScroll()
+const { y } = useWindowScroll();
 
 const isScrolling = computed(() => {
-  return y.value > 30
-})
+  return y.value > 30;
+});
 </script>
 
 <template>

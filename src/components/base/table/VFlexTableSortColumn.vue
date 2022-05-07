@@ -1,6 +1,6 @@
 <script lang="ts">
-import { h, defineComponent, computed } from 'vue'
-import { RouterLink, useRoute, RouteLocationOptions } from 'vue-router'
+import { h, defineComponent, computed } from 'vue';
+import { RouterLink, useRoute, RouteLocationOptions } from 'vue-router';
 
 export default defineComponent({
   props: {
@@ -27,52 +27,52 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, context) {
-    const route = useRoute()
+    const route = useRoute();
     const rawSort = computed(
       () => props.modelValue ?? route.query[props.routerQueryKey] ?? ''
-    )
+    );
 
-    const isAsc = computed(() => rawSort.value === `${props.id}:asc`)
-    const isDesc = computed(() => rawSort.value === `${props.id}:desc`)
+    const isAsc = computed(() => rawSort.value === `${props.id}:asc`);
+    const isDesc = computed(() => rawSort.value === `${props.id}:desc`);
 
     const nextSort = computed(() => {
       return isAsc.value
         ? `${props.id}:desc`
         : isDesc.value
         ? undefined
-        : `${props.id}:asc`
-    })
+        : `${props.id}:asc`;
+    });
 
     const sortedLink = computed(() => {
       if (props.noRouter) {
-        return {}
+        return {};
       }
 
       const query: any = {
         ...route.query,
-      }
+      };
 
       if (props.routerQueryKey) {
-        query[props.routerQueryKey] = nextSort.value
+        query[props.routerQueryKey] = nextSort.value;
       }
 
       return {
         name: route.name,
         params: route.params,
         query: query,
-      } as RouteLocationOptions
-    })
+      } as RouteLocationOptions;
+    });
 
     const handleLinkClick = (e: MouseEvent) => {
-      context.emit('update:modelValue', nextSort.value)
+      context.emit('update:modelValue', nextSort.value);
 
       if (props.noRouter) {
-        e.preventDefault()
-        e.stopPropagation()
+        e.preventDefault();
+        e.stopPropagation();
 
-        return false
+        return false;
       }
-    }
+    };
 
     return () => {
       const slotContent = context.slots?.default?.({
@@ -80,7 +80,7 @@ export default defineComponent({
         isAsc: isAsc.value,
         nextSort: nextSort.value,
         value: rawSort.value,
-      })
+      });
 
       const link = h(
         RouterLink,
@@ -89,11 +89,11 @@ export default defineComponent({
           onClick: handleLinkClick,
           onKeydown(e: KeyboardEvent) {
             if (e.code === 'Space') {
-              e.preventDefault()
-              e.stopPropagation()
+              e.preventDefault();
+              e.stopPropagation();
 
               if (e.target instanceof HTMLAnchorElement) {
-                e.target.dispatchEvent(new MouseEvent('click'))
+                e.target.dispatchEvent(new MouseEvent('click'));
               }
             }
           },
@@ -111,15 +111,15 @@ export default defineComponent({
                   ? 'fa:sort-desc'
                   : 'fa:sort',
               })
-            )
+            );
 
-            return [slotContent ?? props.label, icon]
+            return [slotContent ?? props.label, icon];
           },
         }
-      )
+      );
 
-      return h('span', {}, link)
-    }
+      return h('span', {}, link);
+    };
   },
-})
+});
 </script>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { onceImageErrored } from '/@src/utils/via-placeholder'
+import { computed } from 'vue';
+import { onceImageErrored } from '/@src/utils/via-placeholder';
 
-export type VIconWrapDark = '1' | '2' | '3' | '4' | '5' | '6'
-export type VIconWrapSize = 'small' | 'medium' | 'large'
+export type VIconWrapDark = '1' | '2' | '3' | '4' | '5' | '6';
+export type VIconWrapSize = 'small' | 'medium' | 'large';
 export type VIconWrapColor =
   | 'white'
   | 'black'
@@ -14,18 +14,18 @@ export type VIconWrapColor =
   | 'info'
   | 'success'
   | 'warning'
-  | 'danger'
+  | 'danger';
 export interface VIconWrapProps {
-  icon?: string
-  picture?: string
-  color?: VIconWrapColor
-  size?: VIconWrapSize
-  dark?: VIconWrapDark
-  hasLargeIcon?: boolean
-  hasBackground?: boolean
-  placeholder?: boolean
-  darkPrimary?: boolean
-  darkCardBordered?: boolean
+  icon?: string;
+  picture?: string;
+  color?: VIconWrapColor;
+  size?: VIconWrapSize;
+  dark?: VIconWrapDark;
+  hasLargeIcon?: boolean;
+  hasBackground?: boolean;
+  placeholder?: boolean;
+  darkPrimary?: boolean;
+  darkCardBordered?: boolean;
 }
 
 const props = withDefaults(defineProps<VIconWrapProps>(), {
@@ -34,11 +34,11 @@ const props = withDefaults(defineProps<VIconWrapProps>(), {
   color: undefined,
   size: undefined,
   dark: '3',
-})
+});
 
 const isIconify = computed(() => {
-  return props.icon && props.icon.indexOf(':') !== -1
-})
+  return props.icon && props.icon.indexOf(':') !== -1;
+});
 </script>
 
 <template>

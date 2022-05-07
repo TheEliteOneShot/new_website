@@ -1,11 +1,11 @@
-import { createRouter as createClientRouter, createWebHistory } from 'vue-router'
+import { createRouter as createClientRouter, createWebHistory } from 'vue-router';
 
 /**
  * routes are generated using vite-plugin-pages
  * each .vue files located in the ./src/pages are registered as a route
  * @see https://github.com/hannoeru/vite-plugin-pages
  */
-import routes from 'pages-generated'
+import routes from 'pages-generated';
 
 /**
  * Here is how a simple route is generated:
@@ -51,9 +51,9 @@ function createRouter() {
     // history: createWebHistory('my-subdirectory'),
     history: createWebHistory(),
     routes,
-  })
+  });
 
-  return router
+  return router;
 }
 const router = createRouter();
-export default router
+export default router;

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { watch, ref, reactive, computed } from 'vue'
-import { useVFieldContext } from '/@src/composable/useVFieldContext'
+import { watch, ref, reactive, computed } from 'vue';
+import { useVFieldContext } from '/@src/composable/useVFieldContext';
 
 export interface VInputEmits {
-  (event: 'update:modelValue', value?: any): void
+  (event: 'update:modelValue', value?: any): void;
 }
 export interface VInputProps {
-  raw?: boolean
-  modelValue?: any
-  trueValue?: boolean
-  falseValue?: boolean
+  raw?: boolean;
+  modelValue?: any;
+  trueValue?: boolean;
+  falseValue?: boolean;
 }
 
 const vFieldContext = reactive(
@@ -17,30 +17,30 @@ const vFieldContext = reactive(
     create: false,
     help: 'VInput',
   })
-)
-const emits = defineEmits<VInputEmits>()
+);
+const emits = defineEmits<VInputEmits>();
 const props = withDefaults(defineProps<VInputProps>(), {
   modelValue: '',
   trueValue: true,
   falseValue: false,
-})
-const value = ref(vFieldContext.field?.value ?? props.modelValue)
+});
+const value = ref(vFieldContext.field?.value ?? props.modelValue);
 
 watch(value, () => {
-  emits('update:modelValue', value.value)
-})
+  emits('update:modelValue', value.value);
+});
 watch(
   () => props.modelValue,
   () => {
-    value.value = props.modelValue
+    value.value = props.modelValue;
   }
-)
+);
 
 const classes = computed(() => {
-  if (props.raw) return []
+  if (props.raw) return [];
 
-  return ['input']
-})
+  return ['input'];
+});
 </script>
 
 <template>

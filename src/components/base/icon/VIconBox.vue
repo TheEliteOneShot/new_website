@@ -1,5 +1,5 @@
 <script setup lang="ts">
-export type VIconBoxSize = 'small' | 'medium' | 'large' | 'big' | 'xl'
+export type VIconBoxSize = 'small' | 'medium' | 'large' | 'big' | 'xl';
 export type VIconBoxColor =
   | 'primary'
   | 'info'
@@ -11,18 +11,18 @@ export type VIconBoxColor =
   | 'orange'
   | 'green'
   | 'red'
-  | 'blue'
+  | 'blue';
 export interface VIconProps {
-  size?: VIconBoxSize
-  color?: VIconBoxColor
-  rounded?: boolean
-  bordered?: boolean
+  size?: VIconBoxSize;
+  color?: VIconBoxColor;
+  rounded?: boolean;
+  bordered?: boolean;
 }
 
 const props = withDefaults(defineProps<VIconProps>(), {
   size: undefined,
   color: undefined,
-})
+});
 </script>
 
 <template>

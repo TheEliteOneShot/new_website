@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { ChartOptions, Chart } from 'billboard.js'
-import { nextTick, ref, watchEffect } from 'vue'
-import bb from 'billboard.js'
-import 'billboard.js/dist/billboard.min.css'
+import type { ChartOptions, Chart } from 'billboard.js';
+import { nextTick, ref, watchEffect } from 'vue';
+import bb from 'billboard.js';
+import 'billboard.js/dist/billboard.min.css';
 
 export interface VBillboardJSEmits {
-  (e: 'ready', billboard: Chart): void
+  (e: 'ready', billboard: Chart): void;
 }
 export interface VBillboardJSProps {
-  options: ChartOptions
+  options: ChartOptions;
 }
 
-const emit = defineEmits<VBillboardJSEmits>()
-const props = defineProps<VBillboardJSProps>()
+const emit = defineEmits<VBillboardJSEmits>();
+const props = defineProps<VBillboardJSProps>();
 
-const element = ref<HTMLElement>()
+const element = ref<HTMLElement>();
 
 watchEffect(() => {
   if (element.value) {
@@ -22,17 +22,17 @@ watchEffect(() => {
       const billboard = bb.generate({
         ...props.options,
         bindto: element.value,
-      })
-      emit('ready', billboard)
+      });
+      emit('ready', billboard);
 
       nextTick(() => {
-        billboard.resize()
-      })
+        billboard.resize();
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
-})
+});
 </script>
 
 <template>

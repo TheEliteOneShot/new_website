@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import { ref, watchPostEffect, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, watchPostEffect, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-import type { SidebarTheme } from '/@src/components/navigation/desktop/Sidebar.vue'
-import { usePanels } from '/@src/stores/panels'
-import { useViewWrapper } from '/@src/stores/viewWrapper'
+import type { SidebarTheme } from '/@src/components/navigation/desktop/Sidebar.vue';
+import { usePanels } from '/@src/stores/panels';
+import { useViewWrapper } from '/@src/stores/viewWrapper';
 
 const props = withDefaults(
   defineProps<{
-    theme?: SidebarTheme
-    defaultSidebar?: string
-    closeOnChange?: boolean
-    openOnMounted?: boolean
-    nowrap?: boolean
+    theme?: SidebarTheme;
+    defaultSidebar?: string;
+    closeOnChange?: boolean;
+    openOnMounted?: boolean;
+    nowrap?: boolean;
   }>(),
   {
     defaultSidebar: 'dashboard',
     theme: 'default',
   }
-)
+);
 
-const viewWrapper = useViewWrapper()
-const panels = usePanels()
-const route = useRoute()
-const isMobileSidebarOpen = ref(false)
-const isDesktopSidebarOpen = ref(props.openOnMounted)
-const activeMobileSubsidebar = ref(props.defaultSidebar)
+const viewWrapper = useViewWrapper();
+const panels = usePanels();
+const route = useRoute();
+const isMobileSidebarOpen = ref(false);
+const isDesktopSidebarOpen = ref(props.openOnMounted);
+const activeMobileSubsidebar = ref(props.defaultSidebar);
 
 function switchSidebar(id: string) {
   if (id === activeMobileSubsidebar.value) {
-    isDesktopSidebarOpen.value = !isDesktopSidebarOpen.value
+    isDesktopSidebarOpen.value = !isDesktopSidebarOpen.value;
   } else {
-    isDesktopSidebarOpen.value = true
-    activeMobileSubsidebar.value = id
+    isDesktopSidebarOpen.value = true;
+    activeMobileSubsidebar.value = id;
   }
 }
 
@@ -40,18 +40,18 @@ function switchSidebar(id: string) {
  * watchPostEffect callback will be executed each time dependent reactive values has changed
  */
 watchPostEffect(() => {
-  viewWrapper.setPushed(isDesktopSidebarOpen.value ?? false)
-})
+  viewWrapper.setPushed(isDesktopSidebarOpen.value ?? false);
+});
 watch(
   () => route.fullPath,
   () => {
-    isMobileSidebarOpen.value = false
+    isMobileSidebarOpen.value = false;
 
     if (props.closeOnChange && isDesktopSidebarOpen.value) {
-      isDesktopSidebarOpen.value = false
+      isDesktopSidebarOpen.value = false;
     }
   }
-)
+);
 </script>
 
 <template>
@@ -116,11 +116,11 @@ watch(
             <i aria-hidden="true" class="iconify" data-icon="feather:search"></i>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a aria-label="View settings" href="#">
             <i aria-hidden="true" class="iconify" data-icon="feather:settings"></i>
           </a>
-        </li>
+        </li> -->
       </template>
     </MobileSidebar>
 
@@ -169,19 +169,14 @@ watch(
             @keydown.space.prevent="switchSidebar('elements')"
             @click="switchSidebar('elements')"
           >
-            <i
-              aria-hidden="true"
-              class="iconify sidebar-svg"
-              data-icon="feather:box"
-            ></i>
+            <i aria-hidden="true" class="iconify sidebar-svg" data-icon="feather:box"></i>
           </a>
         </li>
-
       </template>
 
       <template #bottom-links>
         <!-- Search -->
-        <li class="right-panel-trigger is-hidden-touch">
+        <!-- <li class="right-panel-trigger is-hidden-touch">
           <a
             aria-label="Display search panel"
             data-content="Search"
@@ -204,10 +199,10 @@ watch(
           >
             <i aria-hidden="true" class="iconify sidebar-svg" data-icon="feather-x" />
           </a>
-        </li>
+        </li> -->
 
         <!-- Settings -->
-        <li class="is-hidden-touch">
+        <!-- <li class="is-hidden-touch">
           <RouterLink
             id="open-settings"
             :to="{ name: 'me-profile-settings' }"
@@ -219,7 +214,7 @@ watch(
               data-icon="feather:settings"
             ></i>
           </RouterLink>
-        </li>
+        </li> -->
 
         <!-- Profile Dropdown -->
         <li>
@@ -240,7 +235,6 @@ watch(
         />
       </KeepAlive>
     </Transition>
-
 
     <LanguagesPanel />
     <ActivityPanel />
@@ -277,7 +271,7 @@ watch(
             </div>
 
             <Toolbar class="desktop-toolbar">
-              <ToolbarNotification />
+              <!-- <ToolbarNotification />
 
               <a
                 class="toolbar-link right-panel-trigger"
@@ -287,7 +281,7 @@ watch(
                 @click="panels.setActive('activity')"
               >
                 <i aria-hidden="true" class="iconify" data-icon="feather:grid"></i>
-              </a>
+              </a> -->
             </Toolbar>
           </div>
 

@@ -1,50 +1,50 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect, onUnmounted } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { computed, ref, watchEffect, onUnmounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-export type VModalSize = 'small' | 'medium' | 'large' | 'big'
-export type VModalAction = 'center' | 'right'
+export type VModalSize = 'small' | 'medium' | 'large' | 'big';
+export type VModalAction = 'center' | 'right';
 
 export interface VModalEmits {
-  (e: 'close'): void
+  (e: 'close'): void;
 }
 export interface VModalProps {
-  title: string
-  size?: VModalSize
-  actions?: VModalAction
-  open?: boolean
-  rounded?: boolean
-  noscroll?: boolean
-  noclose?: boolean
-  tabs?: boolean
-  cancelLabel?: string
+  title: string;
+  size?: VModalSize;
+  actions?: VModalAction;
+  open?: boolean;
+  rounded?: boolean;
+  noscroll?: boolean;
+  noclose?: boolean;
+  tabs?: boolean;
+  cancelLabel?: string;
 }
 
-const emit = defineEmits<VModalEmits>()
+const emit = defineEmits<VModalEmits>();
 const props = withDefaults(defineProps<VModalProps>(), {
   size: undefined,
   actions: undefined,
   cancelLabel: undefined,
-})
+});
 
-const { t } = useI18n()
-const wasOpen = ref(false)
-const cancelLabel = computed(() => props.cancelLabel || t('cancel-label'))
+const { t } = useI18n();
+const wasOpen = ref(false);
+const cancelLabel = computed(() => props.cancelLabel || t('cancel-label'));
 
 const checkScroll = () => {
   if (props.noscroll && props.open) {
-    document.documentElement.classList.add('no-scroll')
-    wasOpen.value = true
+    document.documentElement.classList.add('no-scroll');
+    wasOpen.value = true;
   } else if (wasOpen.value && props.noscroll && !props.open) {
-    document.documentElement.classList.remove('no-scroll')
-    wasOpen.value = false
+    document.documentElement.classList.remove('no-scroll');
+    wasOpen.value = false;
   }
-}
+};
 
-watchEffect(checkScroll)
+watchEffect(checkScroll);
 onUnmounted(() => {
-  document.documentElement.classList.remove('no-scroll')
-})
+  document.documentElement.classList.remove('no-scroll');
+});
 </script>
 
 <i18n lang="yaml">

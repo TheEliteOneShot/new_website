@@ -1,5 +1,5 @@
-import { useThemeColors } from '/@src/composable/useThemeColors'
-const themeColors = useThemeColors()
+import { useThemeColors } from '/@src/composable/useThemeColors';
+const themeColors = useThemeColors();
 
 export const profitChartOptions = {
   series: [
@@ -25,7 +25,7 @@ export const profitChartOptions = {
   dataLabels: {
     enabled: true,
     formatter: function (val: string) {
-      return val + '%'
+      return val + '%';
     },
     offsetY: -20,
     style: {
@@ -68,7 +68,7 @@ export const profitChartOptions = {
     labels: {
       show: false,
       formatter: function (val: string) {
-        return val + '%'
+        return val + '%';
       },
     },
   },
@@ -77,4 +77,4 @@ export const profitChartOptions = {
     text: 'Profit Evolution',
     align: 'left',
   },
-}
+};

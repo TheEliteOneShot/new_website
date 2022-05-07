@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { PropType } from 'vue'
-import { watch, ref, h, defineComponent, Transition, unref } from 'vue'
-import { useRoute } from 'vue-router'
+import type { PropType } from 'vue';
+import { watch, ref, h, defineComponent, Transition, unref } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   props: {
@@ -16,33 +16,33 @@ export default defineComponent({
   },
   emits: ['update:open'],
   setup(props, { slots, emit }) {
-    const route = useRoute()
-    const hasNestedLinkActive = ref(false)
+    const route = useRoute();
+    const hasNestedLinkActive = ref(false);
 
-    const slotContent = slots.default?.() ?? []
-    const currentRoute = route.name
+    const slotContent = slots.default?.() ?? [];
+    const currentRoute = route.name;
     slotContent.forEach((child) => {
       if (child.props?.to?.name && currentRoute === child.props.to.name) {
-        hasNestedLinkActive.value = true
+        hasNestedLinkActive.value = true;
       }
-    })
+    });
     const isOpen = ref(
       Boolean(
         hasNestedLinkActive.value ||
           (typeof props.collapseId === 'string' && props.open === props.collapseId) ||
           (typeof props.collapseId === 'undefined' && props.open === true)
       )
-    )
+    );
 
     function toggle() {
       if (typeof props.collapseId === 'string') {
         if (props.collapseId === props.open) {
-          emit('update:open')
+          emit('update:open');
         } else {
-          emit('update:open', props.collapseId)
+          emit('update:open', props.collapseId);
         }
       } else {
-        isOpen.value = !isOpen.value
+        isOpen.value = !isOpen.value;
       }
     }
 
@@ -52,14 +52,14 @@ export default defineComponent({
         isOpen.value = Boolean(
           (typeof props.collapseId === 'string' && unref(val) === props.collapseId) ||
             (typeof props.collapseId === 'undefined' && unref(val) === true)
-        )
+        );
       }
-    )
+    );
 
     return () => {
-      const header = slots.header?.()
-      const slotContent = slots.default?.() ?? []
-      const links = slotContent.map((child) => h('li', {}, child))
+      const header = slots.header?.();
+      const slotContent = slots.default?.() ?? [];
+      const links = slotContent.map((child) => h('li', {}, child));
 
       const parentLink = h(
         'a',
@@ -67,23 +67,23 @@ export default defineComponent({
           tabindex: 0,
           class: 'parent-link',
           onClick: (e: MouseEvent) => {
-            e.preventDefault()
+            e.preventDefault();
 
-            toggle()
+            toggle();
           },
           onKeydown(e: KeyboardEvent) {
             if (e.code === 'Space') {
-              e.preventDefault()
-              e.stopPropagation()
+              e.preventDefault();
+              e.stopPropagation();
 
-              toggle()
+              toggle();
             }
           },
         },
         header
-      )
-      const collapseWrap = h('div', { class: 'collapse-wrap' }, parentLink)
-      const content = isOpen.value ? h('ul', {}, links) : undefined
+      );
+      const collapseWrap = h('div', { class: 'collapse-wrap' }, parentLink);
+      const content = isOpen.value ? h('ul', {}, links) : undefined;
 
       return h(
         'li',
@@ -101,15 +101,15 @@ export default defineComponent({
             },
             {
               default() {
-                return content
+                return content;
               },
             }
           ),
         ]
-      )
-    }
+      );
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

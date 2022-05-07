@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 export interface VCollapseItem {
-  title: string
-  content: string
+  title: string;
+  content: string;
 }
 export interface VCollapseProps {
-  items: VCollapseItem[]
-  itemOpen?: number
-  withChevron?: boolean
+  items: VCollapseItem[];
+  itemOpen?: number;
+  withChevron?: boolean;
 }
 
 const props = withDefaults(defineProps<VCollapseProps>(), {
   items: () => [],
   itemOpen: undefined,
-})
+});
 
-const internalItemOpen = ref<number | undefined>(props.itemOpen)
+const internalItemOpen = ref<number | undefined>(props.itemOpen);
 const toggle = (key: number) => {
   if (internalItemOpen.value === key) {
-    internalItemOpen.value = undefined
-    return
+    internalItemOpen.value = undefined;
+    return;
   }
 
-  internalItemOpen.value = key
-}
+  internalItemOpen.value = key;
+};
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-export type VProgressSize = 'tiny' | 'smaller' | 'small'
-export type VProgressColor = 'primary' | 'success' | 'info' | 'warning' | 'danger'
+export type VProgressSize = 'tiny' | 'smaller' | 'small';
+export type VProgressColor = 'primary' | 'success' | 'info' | 'warning' | 'danger';
 export interface VProgressProps {
-  value?: number
-  max?: number
-  size?: VProgressSize
-  color?: VProgressColor
+  value?: number;
+  max?: number;
+  size?: VProgressSize;
+  color?: VProgressColor;
 }
 
 const props = withDefaults(defineProps<VProgressProps>(), {
@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<VProgressProps>(), {
   max: 100,
   size: undefined,
   color: 'primary',
-})
+});
 </script>
 
 <template>

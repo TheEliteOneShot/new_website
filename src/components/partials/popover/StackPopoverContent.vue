@@ -1,16 +1,16 @@
 <script setup lang="ts">
 export type Stack = {
-  logo: string
-  name: string
-  description: string
-  subtitle?: string
-  homepage?: string
-  github?: string
-}
+  logo: string;
+  name: string;
+  description: string;
+  subtitle?: string;
+  homepage?: string;
+  github?: string;
+};
 
 const props = defineProps<{
-  stack: Stack
-}>()
+  stack: Stack;
+}>();
 </script>
 
 <template>

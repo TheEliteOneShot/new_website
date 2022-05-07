@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { UserPopover } from '/@src/models/users'
+import { UserPopover } from '/@src/models/users';
 
 const props = defineProps<{
-  user: UserPopover
-}>()
+  user: UserPopover;
+}>();
 </script>
 
 <template>

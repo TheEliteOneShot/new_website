@@ -41,7 +41,9 @@ module.exports = {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'vue/script-setup-uses-vars': 'error',
+        'vue/no-mutating-props': 'off',
         'vue/multi-word-component-names': 'off',
+        'vue/require-prop-types': 'off',
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': ['error'],
 
@@ -51,4 +53,4 @@ module.exports = {
       },
     },
   ],
-}
+};

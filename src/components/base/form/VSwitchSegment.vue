@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import { ref, watch, useAttrs } from 'vue'
+import { ref, watch, useAttrs } from 'vue';
 
-export type VSwitchSegmentColor = 'primary' | 'info' | 'success' | 'warning' | 'danger'
+export type VSwitchSegmentColor = 'primary' | 'info' | 'success' | 'warning' | 'danger';
 export interface VSwitchSegmentEmits {
-  (e: 'update:modelValue', value: any): void
+  (e: 'update:modelValue', value: any): void;
 }
 export interface VSwitchSegmentProps {
-  modelValue?: any
-  labelTrue?: string
-  labelFalse?: string
-  color?: VSwitchSegmentColor
+  modelValue?: any;
+  labelTrue?: string;
+  labelFalse?: string;
+  color?: VSwitchSegmentColor;
 }
 
-const emit = defineEmits<VSwitchSegmentEmits>()
+const emit = defineEmits<VSwitchSegmentEmits>();
 const props = withDefaults(defineProps<VSwitchSegmentProps>(), {
   modelValue: false,
   labelTrue: undefined,
   labelFalse: undefined,
   color: undefined,
-})
+});
 
-const value = ref(props.modelValue)
+const value = ref(props.modelValue);
 
-const attrs = useAttrs()
+const attrs = useAttrs();
 
 watch(value, () => {
-  emit('update:modelValue', value.value)
-})
+  emit('update:modelValue', value.value);
+});
 watch(
   () => props.modelValue,
   () => {
-    value.value = props.modelValue
+    value.value = props.modelValue;
   }
-)
+);
 </script>
 
 <template>

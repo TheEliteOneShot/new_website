@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
-export type VSnackColor = 'primary' | 'success' | 'info' | 'warning' | 'danger'
-export type VSnackSize = 'small'
+export type VSnackColor = 'primary' | 'success' | 'info' | 'warning' | 'danger';
+export type VSnackSize = 'small';
 export interface VSnackProps {
-  title: string
-  icon?: string
-  image?: string
-  placeholder?: string
-  color?: VSnackColor
-  size?: VSnackSize
-  solid?: boolean
-  white?: boolean
+  title: string;
+  icon?: string;
+  image?: string;
+  placeholder?: string;
+  color?: VSnackColor;
+  size?: VSnackSize;
+  solid?: boolean;
+  white?: boolean;
 }
 
 const props = withDefaults(defineProps<VSnackProps>(), {
@@ -20,16 +20,16 @@ const props = withDefaults(defineProps<VSnackProps>(), {
   color: undefined,
   size: undefined,
   placeholder: 'https://via.placeholder.com/50x50',
-})
+});
 
 function placeholderHandler(event: Event) {
-  const target = event.target as HTMLImageElement
-  target.src = props.placeholder
+  const target = event.target as HTMLImageElement;
+  target.src = props.placeholder;
 }
 
 const isIconify = computed(() => {
-  return props.icon && props.icon.indexOf(':') !== -1
-})
+  return props.icon && props.icon.indexOf(':') !== -1;
+});
 </script>
 
 <template>

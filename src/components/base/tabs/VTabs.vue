@@ -1,74 +1,74 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue';
 
-export type VTabsType = 'boxed' | 'toggle' | 'rounded'
-export type VTabsAlign = 'centered' | 'right'
+export type VTabsType = 'boxed' | 'toggle' | 'rounded';
+export type VTabsAlign = 'centered' | 'right';
 export interface VTabsItem {
-  label: string
-  value: string
-  icon?: string
+  label: string;
+  value: string;
+  icon?: string;
 }
 export interface VTabsProps {
-  tabs: VTabsItem[]
-  selected?: string
-  type?: VTabsType
-  align?: VTabsAlign
-  slider?: boolean
-  slow?: boolean
+  tabs: VTabsItem[];
+  selected?: string;
+  type?: VTabsType;
+  align?: VTabsAlign;
+  slider?: boolean;
+  slow?: boolean;
 }
 
 const emit = defineEmits<{
-  (e: 'update:selected', value: string): void
-}>()
+  (e: 'update:selected', value: string): void;
+}>();
 const props = withDefaults(defineProps<VTabsProps>(), {
   selected: undefined,
   type: undefined,
   align: undefined,
-})
+});
 
-const activeValue = ref(props.selected)
+const activeValue = ref(props.selected);
 const sliderClass = computed(() => {
   if (!props.slider) {
-    return ''
+    return '';
   }
 
   if (props.type === 'rounded') {
     if (props.tabs.length === 3) {
-      return 'is-triple-slider'
+      return 'is-triple-slider';
     }
     if (props.tabs.length === 2) {
-      return 'is-slider'
+      return 'is-slider';
     }
 
-    return ''
+    return '';
   }
 
   if (!props.type) {
     if (props.tabs.length === 3) {
-      return 'is-squared is-triple-slider'
+      return 'is-squared is-triple-slider';
     }
     if (props.tabs.length === 2) {
-      return 'is-squared is-slider'
+      return 'is-squared is-slider';
     }
   }
 
-  return ''
-})
+  return '';
+});
 
 function toggle(value: string) {
-  activeValue.value = value
+  activeValue.value = value;
 }
 
 watch(
   () => props.selected,
   (value) => {
-    activeValue.value = value
+    activeValue.value = value;
   }
-)
+);
 
 watch(activeValue, (value) => {
-  emit('update:selected', value)
-})
+  emit('update:selected', value);
+});
 </script>
 
 <template>

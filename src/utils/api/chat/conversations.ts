@@ -1,11 +1,11 @@
-import type { AxiosInstance } from 'axios'
+import type { AxiosInstance } from 'axios';
 
 export interface Conversation {
-  id: number
-  name: string
-  lastMessage: string
-  unreadMessages: boolean
-  avatar: string
+  id: number;
+  name: string;
+  lastMessage: string;
+  unreadMessages: boolean;
+  avatar: string;
 }
 
 export async function fetchConversations(
@@ -13,15 +13,15 @@ export async function fetchConversations(
   start = 0,
   limit = 20
 ): Promise<{ conversations: Conversation[]; count: number }> {
-  let count = 0
+  let count = 0;
 
   const { data: conversations, headers } = await api.get<Conversation[]>(
     `/api/conversations?_start=${start}&_limit=${limit}`
-  )
+  );
 
   if ('X-Total-Count' in headers) {
-    count = parseInt(headers['X-Total-Count'])
+    count = parseInt(headers['X-Total-Count']);
   }
 
-  return { conversations, count }
+  return { conversations, count };
 }

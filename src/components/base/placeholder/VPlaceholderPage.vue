@@ -1,13 +1,13 @@
 <script setup lang="ts">
 export interface VPlaceholderPageProps {
-  title: string
-  subtitle?: string
-  larger?: boolean
+  title: string;
+  subtitle?: string;
+  larger?: boolean;
 }
 
 const props = withDefaults(defineProps<VPlaceholderPageProps>(), {
   subtitle: undefined,
-})
+});
 </script>
 
 <template>

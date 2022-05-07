@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onceImageErrored } from '/@src/utils/via-placeholder'
-import { useUserSession } from '/@src/stores/userSession'
+import { onceImageErrored } from '/@src/utils/via-placeholder';
+import { useUserSession } from '/@src/stores/userSession';
 
 const userSession = useUserSession();
 </script>
@@ -8,14 +8,15 @@ const userSession = useUserSession();
 <template>
   <div class="profile-wrapper">
     <div class="profile-header has-text-centered">
-      <VAvatar size="xl" picture="/images/avatars/svg/vuero-1.svg"
-        badge="/images/icons/flags/united-states-of-america.svg" />
+      <VAvatar
+        size="xl"
+        picture="/images/avatars/svg/vuero-1.svg"
+        badge="/images/icons/flags/united-states-of-america.svg"
+      />
 
       <h3 class="title is-4 is-narrow is-thin">{{ userSession?.user?.username }}</h3>
-      <p class="light-text">
-        Welcome to the beginning
-      </p>
-      <div class="profile-stats">
+      <p class="light-text">Welcome to the beginning</p>
+      <!-- <div class="profile-stats">
         <div class="profile-stat">
           <i aria-hidden="true" class="lnil lnil-users-alt"></i>
           <span>7+ billion Relations</span>
@@ -31,7 +32,7 @@ const userSession = useUserSession();
           <a><i aria-hidden="true" class="fab fa-twitter"></i></a>
           <a><i aria-hidden="true" class="fab fa-linkedin-in"></i></a>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="profile-body">
@@ -65,8 +66,11 @@ const userSession = useUserSession();
               <div class="section-content">
                 <div class="experience-wrapper">
                   <div class="experience-item">
-                    <img src="/demo/photos/brands/airbnb.svg" alt=""
-                      @error.once="(event) => onceImageErrored(event, '150x150')" />
+                    <img
+                      src="/demo/photos/brands/airbnb.svg"
+                      alt=""
+                      @error.once="(event) => onceImageErrored(event, '150x150')"
+                    />
                     <div class="meta">
                       <span class="dark-inverted">Airbnb HQ</span>
                       <span>
@@ -74,12 +78,15 @@ const userSession = useUserSession();
                         <i aria-hidden="true" class="fas fa-circle"></i>
                         <span>October 2020</span>
                       </span>
-                      <span>Product Manager</span>
+                      <span>{{ userSession?.user?.role }}</span>
                     </div>
                   </div>
                   <div class="experience-item">
-                    <img src="/demo/photos/brands/facebook.svg" alt=""
-                      @error.once="(event) => onceImageErrored(event, '150x150')" />
+                    <img
+                      src="/demo/photos/brands/facebook.svg"
+                      alt=""
+                      @error.once="(event) => onceImageErrored(event, '150x150')"
+                    />
                     <div class="meta">
                       <span class="dark-inverted">Facebook</span>
                       <span>
@@ -87,12 +94,15 @@ const userSession = useUserSession();
                         <i aria-hidden="true" class="fas fa-circle"></i>
                         <span>October 2020</span>
                       </span>
-                      <span>Product Manager</span>
+                      <span>{{ userSession?.user?.role }}</span>
                     </div>
                   </div>
                   <div class="experience-item">
-                    <img src="/demo/photos/brands/atlassian.svg" alt=""
-                      @error.once="(event) => onceImageErrored(event, '150x150')" />
+                    <img
+                      src="/demo/photos/brands/atlassian.svg"
+                      alt=""
+                      @error.once="(event) => onceImageErrored(event, '150x150')"
+                    />
                     <div class="meta">
                       <span class="dark-inverted">Atlassian</span>
                       <span>
@@ -104,8 +114,11 @@ const userSession = useUserSession();
                     </div>
                   </div>
                   <div class="experience-item">
-                    <img src="/demo/photos/brands/github.svg" alt=""
-                      @error.once="(event) => onceImageErrored(event, '150x150')" />
+                    <img
+                      src="/demo/photos/brands/github.svg"
+                      alt=""
+                      @error.once="(event) => onceImageErrored(event, '150x150')"
+                    />
                     <div class="meta">
                       <span class="dark-inverted">Github</span>
                       <span>
@@ -134,8 +147,15 @@ const userSession = useUserSession();
                   <div class="languages-item">
                     <VIconWrap picture="/images/icons/flags/united-states-of-america.svg">
                       <template #after>
-                        <VPeity type="donut" :values="[100, 100]" :fill="['var(--primary)', 'transparent']" :height="50"
-                          :inner-radius="22" :radius="8" :width="50" />
+                        <VPeity
+                          type="donut"
+                          :values="[100, 100]"
+                          :fill="['var(--primary)', 'transparent']"
+                          :height="50"
+                          :inner-radius="22"
+                          :radius="8"
+                          :width="50"
+                        />
                       </template>
                     </VIconWrap>
 
@@ -147,8 +167,14 @@ const userSession = useUserSession();
                   <div class="languages-item">
                     <VIconWrap picture="/images/icons/flags/france.svg">
                       <template #after>
-                        <VPeity type="donut" :values="[80, 100]" :fill="['var(--primary)', 'transparent']" :height="50"
-                          :inner-radius="22" :width="50" />
+                        <VPeity
+                          type="donut"
+                          :values="[80, 100]"
+                          :fill="['var(--primary)', 'transparent']"
+                          :height="50"
+                          :inner-radius="22"
+                          :width="50"
+                        />
                       </template>
                     </VIconWrap>
 
@@ -160,8 +186,14 @@ const userSession = useUserSession();
                   <div class="languages-item">
                     <VIconWrap picture="/images/icons/flags/germany.svg">
                       <template #after>
-                        <VPeity type="donut" :values="[30, 100]" :fill="['var(--primary)', 'transparent']" :height="50"
-                          :inner-radius="22" :width="50" />
+                        <VPeity
+                          type="donut"
+                          :values="[30, 100]"
+                          :fill="['var(--primary)', 'transparent']"
+                          :height="50"
+                          :inner-radius="22"
+                          :width="50"
+                        />
                       </template>
                     </VIconWrap>
 
@@ -173,8 +205,14 @@ const userSession = useUserSession();
                   <div class="languages-item">
                     <VIconWrap picture="/images/icons/flags/spain.svg">
                       <template #after>
-                        <VPeity type="donut" :values="[40, 100]" :fill="['var(--primary)', 'transparent']" :height="50"
-                          :inner-radius="22" :width="50" />
+                        <VPeity
+                          type="donut"
+                          :values="[40, 100]"
+                          :fill="['var(--primary)', 'transparent']"
+                          :height="50"
+                          :inner-radius="22"
+                          :width="50"
+                        />
                       </template>
                     </VIconWrap>
 
@@ -207,9 +245,9 @@ const userSession = useUserSession();
                     </div>
                     <div class="people">
                       <VAvatar size="small" initials="BT" color="warning" />
-                      <VAvatar size="small" picture="/demo/avatars/18.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                       <VAvatar size="small" initials="JD" color="info" />
-                      <VAvatar size="small" picture="/demo/avatars/7.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                       <VAvatar size="small" initials="38" />
                     </div>
                   </div>
@@ -223,10 +261,10 @@ const userSession = useUserSession();
                       <span>4 years of experience</span>
                     </div>
                     <div class="people">
-                      <VAvatar size="small" picture="/demo/avatars/21.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                       <VAvatar size="small" initials="AT" color="success" />
-                      <VAvatar size="small" picture="/demo/avatars/39.jpg" />
-                      <VAvatar size="small" picture="/demo/avatars/23.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                       <VAvatar size="small" initials="27" />
                     </div>
                   </div>
@@ -240,10 +278,10 @@ const userSession = useUserSession();
                       <span>10+ years of experience</span>
                     </div>
                     <div class="people">
-                      <VAvatar size="small" picture="/demo/avatars/38.jpg" />
-                      <VAvatar size="small" picture="/demo/avatars/11.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                       <VAvatar size="small" initials="SC" color="h-purple" />
-                      <VAvatar size="small" picture="/demo/avatars/13.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                       <VAvatar size="small" initials="19" />
                     </div>
                   </div>
@@ -257,10 +295,10 @@ const userSession = useUserSession();
                       <span>10+ years of experience</span>
                     </div>
                     <div class="people">
-                      <VAvatar size="small" picture="/demo/avatars/21.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                       <VAvatar size="small" initials="SC" color="h-purple" />
-                      <VAvatar size="small" picture="/demo/avatars/5.jpg" />
-                      <VAvatar size="small" picture="/demo/avatars/7.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
+                      <VAvatar size="small" picture="/images/avatars/placeholder.jpg" />
                       <VAvatar size="small" initials="31" />
                     </div>
                   </div>
@@ -285,8 +323,11 @@ const userSession = useUserSession();
                 <div class="recommendations-wrapper">
                   <!--Recommendation-->
                   <div class="recommendations-item">
-                    <VAvatar size="large" picture="/demo/avatars/5.jpg"
-                      badge="/images/icons/flags/united-states-of-america.svg" />
+                    <VAvatar
+                      size="large"
+                      picture="/images/avatars/placeholder.jpg"
+                      badge="/images/icons/flags/united-states-of-america.svg"
+                    />
                     <h3 class="dark-inverted">Project Manager</h3>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. At multis
@@ -300,8 +341,11 @@ const userSession = useUserSession();
 
                   <!--Recommendation-->
                   <div class="recommendations-item">
-                    <VAvatar size="large" picture="/demo/avatars/18.jpg"
-                      badge="/images/icons/flags/united-states-of-america.svg" />
+                    <VAvatar
+                      size="large"
+                      picture="/images/avatars/placeholder.jpg"
+                      badge="/images/icons/flags/united-states-of-america.svg"
+                    />
 
                     <h3 class="dark-inverted">UI/UX Designer</h3>
                     <p>
@@ -356,8 +400,14 @@ const userSession = useUserSession();
                   <div class="tools-item">
                     <VIconWrap picture="/images/icons/stacks/illustrator.svg">
                       <template #after>
-                        <VPeity type="pie" :values="[80, 100]" :fill="['var(--primary)', 'transparent']" :height="50"
-                          :inner-radius="22" :width="50" />
+                        <VPeity
+                          type="pie"
+                          :values="[80, 100]"
+                          :fill="['var(--primary)', 'transparent']"
+                          :height="50"
+                          :inner-radius="22"
+                          :width="50"
+                        />
                       </template>
                     </VIconWrap>
 
@@ -371,8 +421,14 @@ const userSession = useUserSession();
                   <div class="tools-item">
                     <VIconWrap picture="/demo/photos/brands/jira.svg">
                       <template #after>
-                        <VPeity type="pie" :values="[60, 100]" :fill="['var(--primary)', 'transparent']" :height="50"
-                          :inner-radius="22" :width="50" />
+                        <VPeity
+                          type="pie"
+                          :values="[60, 100]"
+                          :fill="['var(--primary)', 'transparent']"
+                          :height="50"
+                          :inner-radius="22"
+                          :width="50"
+                        />
                       </template>
                     </VIconWrap>
 
@@ -386,8 +442,14 @@ const userSession = useUserSession();
                   <div class="tools-item">
                     <VIconWrap picture="/demo/photos/brands/office.svg">
                       <template #after>
-                        <VPeity type="pie" :values="[95, 100]" :fill="['var(--primary)', 'transparent']" :height="50"
-                          :inner-radius="22" :width="50" />
+                        <VPeity
+                          type="pie"
+                          :values="[95, 100]"
+                          :fill="['var(--primary)', 'transparent']"
+                          :height="50"
+                          :inner-radius="22"
+                          :width="50"
+                        />
                       </template>
                     </VIconWrap>
 
@@ -412,7 +474,10 @@ const userSession = useUserSession();
                 <div class="people-wrapper">
                   <!--People-->
                   <a href="#" class="people-item">
-                    <VAvatar picture="/demo/avatars/25.jpg" badge="/images/icons/stacks/js.svg" />
+                    <VAvatar
+                      picture="/images/avatars/placeholder.jpg"
+                      badge="/images/icons/stacks/js.svg"
+                    />
 
                     <div class="meta">
                       <span class="dark-inverted">Melany W.</span>
@@ -422,7 +487,10 @@ const userSession = useUserSession();
 
                   <!--People-->
                   <a href="#" class="people-item">
-                    <VAvatar picture="/demo/avatars/29.jpg" badge="/images/icons/stacks/python.svg" />
+                    <VAvatar
+                      picture="/images/avatars/placeholder.jpg"
+                      badge="/images/icons/stacks/python.svg"
+                    />
 
                     <div class="meta">
                       <span class="dark-inverted">Hakeem C.</span>
@@ -432,7 +500,10 @@ const userSession = useUserSession();
 
                   <!--People-->
                   <a href="#" class="people-item">
-                    <VAvatar picture="/demo/avatars/38.jpg" badge="/images/icons/stacks/vuejs.svg" />
+                    <VAvatar
+                      picture="/images/avatars/placeholder.jpg"
+                      badge="/images/icons/stacks/vuejs.svg"
+                    />
 
                     <div class="meta">
                       <span class="dark-inverted">Christie D.</span>
@@ -442,7 +513,10 @@ const userSession = useUserSession();
 
                   <!--People-->
                   <a href="#" class="people-item">
-                    <VAvatar picture="/demo/avatars/28.jpg" badge="/images/icons/stacks/angular.svg" />
+                    <VAvatar
+                      picture="/images/avatars/placeholder.jpg"
+                      badge="/images/icons/stacks/angular.svg"
+                    />
 
                     <div class="meta">
                       <span class="dark-inverted">Edouard F.</span>
@@ -452,7 +526,10 @@ const userSession = useUserSession();
 
                   <!--People-->
                   <a href="#" class="people-item">
-                    <VAvatar picture="/demo/avatars/19.jpg" badge="/images/icons/stacks/cplus.svg" />
+                    <VAvatar
+                      picture="/images/avatars/placeholder.jpg"
+                      badge="/images/icons/stacks/cplus.svg"
+                    />
 
                     <div class="meta">
                       <span class="dark-inverted">Greta K.</span>
@@ -486,7 +563,7 @@ const userSession = useUserSession();
   .profile-header {
     text-align: center;
 
-    >img {
+    > img {
       display: block;
       margin: 0 auto;
       max-width: 300px;
@@ -600,7 +677,7 @@ const userSession = useUserSession();
               .meta {
                 margin-left: 10px;
 
-                >span {
+                > span {
                   font-family: var(--font);
                   display: block;
 
@@ -674,7 +751,7 @@ const userSession = useUserSession();
               .meta {
                 margin-left: 10px;
 
-                >span {
+                > span {
                   display: block;
                   font-family: var(--font);
 
@@ -806,7 +883,7 @@ const userSession = useUserSession();
               padding: 30px 20px;
               border-radius: var(--radius);
 
-              >.v-avatar {
+              > .v-avatar {
                 display: block;
                 margin: 0 auto 8px;
               }
@@ -895,7 +972,7 @@ const userSession = useUserSession();
               .meta {
                 margin-left: 10px;
 
-                >span {
+                > span {
                   display: block;
                   font-family: var(--font);
 
@@ -934,7 +1011,7 @@ const userSession = useUserSession();
               .meta {
                 margin-left: 10px;
 
-                >span {
+                > span {
                   display: block;
                   font-family: var(--font);
 
@@ -1006,19 +1083,19 @@ const userSession = useUserSession();
 
           .section-content {
             .icon-wrap {
-              >img {
+              > img {
                 border-color: var(--dark-sidebar-light-12) !important;
               }
             }
 
             .experience-wrapper {
               .experience-item {
-                >img {
+                > img {
                   border-color: var(--dark-sidebar-light-12);
                 }
 
                 .meta {
-                  >span {
+                  > span {
                     &:nth-child(3) {
                       color: var(--primary);
                     }

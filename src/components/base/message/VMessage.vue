@@ -5,19 +5,19 @@ export type VMessageColor =
   | 'info'
   | 'warning'
   | 'danger'
-  | 'white'
+  | 'white';
 export interface VMessageEmits {
-  (e: 'close'): void
+  (e: 'close'): void;
 }
 export interface VMessageProps {
-  color?: VMessageColor
-  closable?: boolean
+  color?: VMessageColor;
+  closable?: boolean;
 }
 
-const emit = defineEmits<VMessageEmits>()
+const emit = defineEmits<VMessageEmits>();
 const props = withDefaults(defineProps<VMessageProps>(), {
   color: undefined,
-})
+});
 </script>
 
 <template>

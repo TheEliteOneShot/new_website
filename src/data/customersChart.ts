@@ -1,5 +1,5 @@
-import { useThemeColors } from '/@src/composable/useThemeColors'
-const themeColors = useThemeColors()
+import { useThemeColors } from '/@src/composable/useThemeColors';
+const themeColors = useThemeColors();
 
 export const customersOptions = {
   series: [
@@ -55,4 +55,4 @@ export const customersOptions = {
       format: 'dd/MM/yy HH:mm',
     },
   },
-}
+};

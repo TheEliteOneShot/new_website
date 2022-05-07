@@ -1,15 +1,15 @@
 <script lang="ts">
-import type { PropType } from 'vue'
-import { computed, defineComponent, h, resolveComponent } from 'vue'
+import type { PropType } from 'vue';
+import { computed, defineComponent, h, resolveComponent } from 'vue';
 
-export type VIconButtonDark = '1' | '2' | '3' | '4' | '5' | '6'
+export type VIconButtonDark = '1' | '2' | '3' | '4' | '5' | '6';
 export type VIconButtonColor =
   | 'primary'
   | 'info'
   | 'success'
   | 'warning'
   | 'danger'
-  | 'white'
+  | 'white';
 
 export default defineComponent({
   props: {
@@ -37,27 +37,27 @@ export default defineComponent({
         ) {
           console.warn(
             `VIconButton: invalid "${value}" color. Should be primary, info, success, warning, danger, white or undefined`
-          )
-          return false
+          );
+          return false;
         }
 
-        return true
+        return true;
       },
     },
     dark: {
       type: String as PropType<VIconButtonDark>,
       default: undefined,
       validator: (value: VIconButtonDark) => {
-        if (!value) return true
+        if (!value) return true;
         // The value must match one of these strings
         if (['1', '2', '3', '4', '5', '6'].indexOf(value) === -1) {
           console.warn(
             `VIconButton: invalid "${value}" dark. Should be 1, 2, 3, 4, 5, 6 or undefined`
-          )
-          return false
+          );
+          return false;
         }
 
-        return true
+        return true;
       },
     },
     circle: {
@@ -99,7 +99,7 @@ export default defineComponent({
   },
   setup(props, { attrs }) {
     const classes = computed(() => {
-      const defaultClasses = (attrs?.class || []) as any
+      const defaultClasses = (attrs?.class || []) as any;
       return [
         ...defaultClasses,
         props.disabled && 'is-disabled',
@@ -113,23 +113,23 @@ export default defineComponent({
         props.loading && 'is-loading',
         props.color && `is-${props.color}`,
         props.light && 'is-light',
-      ]
-    })
-    const isIconify = computed(() => props.icon && props.icon.indexOf(':') !== -1)
+      ];
+    });
+    const isIconify = computed(() => props.icon && props.icon.indexOf(':') !== -1);
 
     return () => {
-      let icon
+      let icon;
       if (isIconify.value) {
         icon = h('i', {
           'aria-hidden': true,
           class: 'iconify',
           'data-icon': props.icon,
-        })
+        });
       } else {
-        icon = h('i', { 'aria-hidden': true, class: props.icon })
+        icon = h('i', { 'aria-hidden': true, class: props.icon });
       }
 
-      const iconWrapper = h('span', { class: 'icon' }, icon)
+      const iconWrapper = h('span', { class: 'icon' }, icon);
 
       if (props.to) {
         return h(
@@ -140,7 +140,7 @@ export default defineComponent({
             class: ['button', ...classes.value],
           },
           iconWrapper
-        )
+        );
       } else if (props.href) {
         return h(
           'a',
@@ -150,7 +150,7 @@ export default defineComponent({
             class: classes.value,
           },
           iconWrapper
-        )
+        );
       }
 
       return h(
@@ -162,8 +162,8 @@ export default defineComponent({
           class: ['button', ...classes.value],
         },
         iconWrapper
-      )
-    }
+      );
+    };
   },
-})
+});
 </script>

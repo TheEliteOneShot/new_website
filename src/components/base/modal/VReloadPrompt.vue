@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { useRegisterSW } from 'virtual:pwa-register/vue'
-import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { useRegisterSW } from 'virtual:pwa-register/vue';
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 export interface VReloadPromptProps {
-  appName: string
+  appName: string;
 }
 
-const loading = ref(false)
-const props = defineProps<VReloadPromptProps>()
+const loading = ref(false);
+const props = defineProps<VReloadPromptProps>();
 
-const { t } = useI18n()
-const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW()
+const { t } = useI18n();
+const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
 
 const close = async () => {
-  loading.value = false
-  offlineReady.value = false
-  needRefresh.value = false
-}
+  loading.value = false;
+  offlineReady.value = false;
+  needRefresh.value = false;
+};
 const update = async () => {
-  loading.value = true
-  await updateServiceWorker()
-  loading.value = false
-}
+  loading.value = true;
+  await updateServiceWorker();
+  loading.value = false;
+};
 </script>
 
 <i18n lang="yaml">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close']);
 </script>
 
 <template>

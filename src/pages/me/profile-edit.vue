@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useUserSession } from '/@src/stores/userSession'
+import { useUserSession } from '/@src/stores/userSession';
 const userSession = useUserSession();
-const username = userSession?.user?.username || "";
+const username = userSession?.user?.username || '';
+const role = userSession?.user?.role || '';
 </script>
 
 <template>
@@ -12,7 +13,7 @@ const username = userSession?.user?.username || "";
         <!--Navigation-->
         <div class="column is-4">
           <div class="account-box is-navigation">
-            <VBlock :title="username" subtitle="Product Manager" center>
+            <VBlock :title="username" :subtitle="role" center>
               <template #icon>
                 <VAvatar
                   size="large"
@@ -23,10 +24,7 @@ const username = userSession?.user?.username || "";
             </VBlock>
 
             <div class="account-menu">
-              <RouterLink
-                :to="{ name: 'me-profile-edit' }"
-                class="account-menu-item"
-              >
+              <RouterLink :to="{ name: 'me-profile-edit' }" class="account-menu-item">
                 <i aria-hidden="true" class="lnil lnil-user-alt"></i>
                 <span>General</span>
                 <span class="end">

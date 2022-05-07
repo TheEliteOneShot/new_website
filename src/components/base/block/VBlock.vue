@@ -1,19 +1,19 @@
 <script setup lang="ts">
 export interface VBlockProps {
-  title: string
-  subtitle?: string
-  infratitle?: string
-  center?: boolean
-  lighter?: boolean
-  narrow?: boolean
-  mResponsive?: boolean
-  tResponsive?: boolean
+  title: string;
+  subtitle?: string;
+  infratitle?: string;
+  center?: boolean;
+  lighter?: boolean;
+  narrow?: boolean;
+  mResponsive?: boolean;
+  tResponsive?: boolean;
 }
 
 const props = withDefaults(defineProps<VBlockProps>(), {
   subtitle: undefined,
   infratitle: undefined,
-})
+});
 </script>
 
 <template>

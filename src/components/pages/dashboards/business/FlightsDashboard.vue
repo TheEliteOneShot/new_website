@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const date = ref({
   start: new Date(),
   end: new Date(),
-})
+});
 
-const options = ref(['All Flights'])
+const options = ref(['All Flights']);
 </script>
 
 <template>

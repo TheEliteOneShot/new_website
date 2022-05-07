@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { usePanels } from '/@src/stores/panels'
-const panels = usePanels()
+import { usePanels } from '/@src/stores/panels';
+const panels = usePanels();
 </script>
 
 <template>
@@ -46,9 +46,9 @@ const panels = usePanels()
 
             <div class="participants-inner">
               <div class="avatar-stack">
-                <VAvatar picture="/demo/avatars/7.jpg" />
+                <VAvatar picture="/images/avatars/placeholder.jpg" />
                 <VAvatar picture="/images/avatars/svg/vuero-1.svg" />
-                <VAvatar picture="/demo/avatars/5.jpg" />
+                <VAvatar picture="/images/avatars/placeholder.jpg" />
               </div>
 
               <button>

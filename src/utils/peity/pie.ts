@@ -1,66 +1,66 @@
 // pie.ts
-import { PeityOptions } from './types'
-import { createSvgElement } from './createSvgElement'
+import { PeityOptions } from './types';
+import { createSvgElement } from './createSvgElement';
 
 export function drawPie(el: HTMLElement, data: number[], opts: PeityOptions) {
-  let values = data.map((n: any) => (n > 0 ? n : 0))
+  let values = data.map((n: any) => (n > 0 ? n : 0));
 
   if (values.length === 2) {
-    const v1 = values[0]
-    const v2 = values[1]
-    values = [v1, Math.max(0, v2 - v1)]
+    const v1 = values[0];
+    const v2 = values[1];
+    values = [v1, Math.max(0, v2 - v1)];
   }
 
-  let i = 0
-  let length = values.length
-  let sum = 0
+  let i = 0;
+  let length = values.length;
+  let sum = 0;
 
   for (; i < length; i++) {
-    sum += values[i]
+    sum += values[i];
   }
 
   if (!sum) {
-    length = 2
-    sum = 1
-    values = [0, 1]
+    length = 2;
+    sum = 1;
+    values = [0, 1];
   }
 
-  const rect = el.getBoundingClientRect()
-  const width = rect.width
-  const height = rect.height
-  const cx = width / 2
-  const cy = height / 2
+  const rect = el.getBoundingClientRect();
+  const width = rect.width;
+  const height = rect.height;
+  const cx = width / 2;
+  const cy = height / 2;
 
-  const radius = Math.min(cx, cy)
-  let innerRadius = opts.innerRadius
+  const radius = Math.min(cx, cy);
+  let innerRadius = opts.innerRadius;
 
   if (opts.type === 'donut' && !innerRadius) {
-    innerRadius = radius * 0.5
+    innerRadius = radius * 0.5;
   }
 
-  const pi = Math.PI
+  const pi = Math.PI;
 
   const scale = (value: number, rad: number) => {
-    const radians = (value / sum) * pi * 2 - pi / 2
-    return [rad * Math.cos(radians) + cx, rad * Math.sin(radians) + cy]
-  }
+    const radians = (value / sum) * pi * 2 - pi / 2;
+    return [rad * Math.cos(radians) + cx, rad * Math.sin(radians) + cy];
+  };
 
-  let cumulative = 0
+  let cumulative = 0;
 
   for (i = 0; i < length; i++) {
-    const value = values[i]
-    const portion = value / sum
-    let $node
+    const value = values[i];
+    const portion = value / sum;
+    let $node;
 
     if (portion === 0) {
-      continue
+      continue;
     }
 
     if (portion === 1) {
       if (innerRadius) {
-        const x2 = cx - 0.01
-        const y1 = cy - radius
-        const y2 = cy - innerRadius
+        const x2 = cx - 0.01;
+        const y1 = cy - radius;
+        const y2 = cy - innerRadius;
 
         $node = createSvgElement('path', {
           d: [
@@ -87,16 +87,16 @@ export function drawPie(el: HTMLElement, data: number[], opts: PeityOptions) {
             cx,
             y2,
           ].join(' '),
-        })
+        });
       } else {
         $node = createSvgElement('circle', {
           cx,
           cy,
           r: radius,
-        })
+        });
       }
     } else {
-      const cumulativePlusValue = cumulative + value
+      const cumulativePlusValue = cumulative + value;
 
       let d = ['M'].concat(
         scale(cumulative, radius).map(String),
@@ -108,7 +108,7 @@ export function drawPie(el: HTMLElement, data: number[], opts: PeityOptions) {
         '1',
         scale(cumulativePlusValue, radius).map(String),
         'L'
-      )
+      );
 
       if (innerRadius) {
         d = d.concat(
@@ -120,31 +120,31 @@ export function drawPie(el: HTMLElement, data: number[], opts: PeityOptions) {
           portion > 0.5 ? '1' : '0',
           '0',
           scale(cumulative, innerRadius).map(String)
-        )
+        );
       } else {
-        d.push(`${cx}`, `${cy}`)
+        d.push(`${cx}`, `${cy}`);
       }
 
-      cumulative += value
+      cumulative += value;
 
       $node = createSvgElement('path', {
         d: d.join(' '),
-      })
+      });
     }
 
-    let fill
+    let fill;
     if (typeof opts.fill === 'string') {
-      fill = opts.fill
+      fill = opts.fill;
     } else if (Array.isArray(opts.fill)) {
-      fill = opts.fill?.[i] ?? opts.fill?.[0]
+      fill = opts.fill?.[i] ?? opts.fill?.[0];
     } else if (typeof opts.fill === 'function') {
-      fill = opts.fill(i)
+      fill = opts.fill(i);
     }
 
     if (fill) {
-      $node.setAttribute('fill', fill)
+      $node.setAttribute('fill', fill);
     }
 
-    el.appendChild($node)
+    el.appendChild($node);
   }
 }

@@ -12,7 +12,7 @@
  * @see /app.ts
  * @see /plugins/*.ts
  */
-import { createApp } from './app'
+import { createApp } from './app';
 
 /**
  * We create our app and mount it when it is ready
@@ -21,8 +21,8 @@ import { createApp } from './app'
  */
 createApp().then(async (main) => {
   // wait for the app to be ready
-  await main.router.isReady()
+  await main.router.isReady();
 
   // finaly mount the app to the DOM
-  main.app.mount('#app')
-})
+  main.app.mount('#app');
+});

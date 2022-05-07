@@ -1,13 +1,12 @@
 <script lang="ts">
-import { defineComponent, onMounted, onActivated, ref } from "vue";
+import { defineComponent, onMounted, onActivated, ref } from 'vue';
 import agGrid from '/@src/ag-grid';
-import { useDarkmode } from '/@src/stores/darkmode'
+import { useDarkmode } from '/@src/stores/darkmode';
 export default defineComponent({
-  name: "GridUserItems",
-  props: ["serverDataSource", "options"],
+  name: 'GridUserItems',
+  props: ['serverDataSource', 'options'],
   setup(props) {
-
-    const darkmode = useDarkmode()
+    const darkmode = useDarkmode();
     onActivated(async () => {
       if (props.options?.api?.refreshServerSideStore !== undefined)
         props.options.api.refreshServerSideStore();
@@ -25,7 +24,7 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      const element = document.querySelector("#gridTarget");
+      const element = document.querySelector('#gridTarget');
       props.options.onFirstDataRendered = onFirstDataRendered;
       props.options.onGridReady = onGridReady;
       await agGrid.Grid(element, props.options);
@@ -34,7 +33,7 @@ export default defineComponent({
 
     const showGrid = ref(false);
 
-    return { showGrid, darkmode};
+    return { showGrid, darkmode };
   },
 });
 </script>
@@ -42,8 +41,12 @@ export default defineComponent({
 <template>
   <div class="container">
     <div
-      :class="{ visible: showGrid, 'ag-theme-alpine-dark': darkmode.isDark, 'ag-theme-alpine': !darkmode.isDark }"
       id="gridTarget"
+      :class="{
+        visible: showGrid,
+        'ag-theme-alpine-dark': darkmode.isDark,
+        'ag-theme-alpine': !darkmode.isDark,
+      }"
       style="height: 600px; width: auto"
       class=""
     ></div>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
+import { computed, reactive } from 'vue';
 
-import VLabel from '/@src/components/base/form/VLabel.vue'
-import { useVFieldContext } from '/@src/composable/useVFieldContext'
+import VLabel from '/@src/components/base/form/VLabel.vue';
+import { useVFieldContext } from '/@src/composable/useVFieldContext';
 
 const props = defineProps({
   id: {
@@ -49,28 +49,28 @@ const props = defineProps({
     type: Boolean,
     default: undefined,
   },
-})
+});
 
 const isIconify = computed(() => {
-  return props.icon && props.icon.indexOf(':') !== -1
-})
+  return props.icon && props.icon.indexOf(':') !== -1;
+});
 
 const vFieldContext = reactive(
   useVFieldContext({
     id: props.id,
     inherit: !props.subcontrol,
   })
-)
+);
 
-const isValid = computed(() => props.isValid)
+const isValid = computed(() => props.isValid);
 const hasError = computed(() =>
   vFieldContext?.field
     ? Boolean(vFieldContext?.field?.errorMessage?.value)
     : props.hasError
-)
+);
 
 const controlClasees = computed(() => {
-  if (props.raw) return []
+  if (props.raw) return [];
 
   return [
     'control',
@@ -83,8 +83,8 @@ const controlClasees = computed(() => {
     isValid.value && 'has-validation has-success',
     hasError.value && 'has-validation has-error',
     props.subcontrol && 'subcontrol',
-  ]
-})
+  ];
+});
 </script>
 
 <template>

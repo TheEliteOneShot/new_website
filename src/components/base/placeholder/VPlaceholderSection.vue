@@ -1,12 +1,12 @@
 <script setup lang="ts">
 export interface VPlaceholderSectionProps {
-  title: string
-  subtitle?: string
+  title: string;
+  subtitle?: string;
 }
 
 const props = withDefaults(defineProps<VPlaceholderSectionProps>(), {
   subtitle: undefined,
-})
+});
 </script>
 
 <template>

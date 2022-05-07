@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useHead } from '@vueuse/head'
-import { useApi } from '/@src/composable/useApi'
-import { getUserItems } from '/@src/utils/api/user'
+import { useHead } from '@vueuse/head';
+import { useApi } from '/@src/composable/useApi';
+import { getUserItems } from '/@src/utils/api/user';
 
-import { useViewWrapper } from '/@src/stores/viewWrapper'
+import { useViewWrapper } from '/@src/stores/viewWrapper';
 
-const viewWrapper = useViewWrapper()
-viewWrapper.setPageTitle('Auth Test')
+const viewWrapper = useViewWrapper();
+viewWrapper.setPageTitle('Auth Test');
 
 const api = useApi();
 
 useHead({
   title: 'Auth Test',
-})
+});
 
 const gridServerDataSource = async () => {
   return {
@@ -30,22 +30,24 @@ const gridServerDataSource = async () => {
 
 const gridServerDataOptions = {
   columnDefs: [
-    { field: "owner", minWidth: 220 },
-    { field: "description", minWidth: 200 },
+    { field: 'owner', minWidth: 220 },
+    { field: 'description', minWidth: 200 },
   ],
   defaultColDef: {
     sortable: true,
     resizable: true,
   },
-  rowModelType: "serverSide",
-  serverSideStoreType: "full",
-  animateRows: true
+  rowModelType: 'serverSide',
+  serverSideStoreType: 'full',
+  animateRows: true,
 };
 </script>
 
 <template>
-
   <div class="page-content-inner">
-    <GridFromServer :serverDataSource="gridServerDataSource" :options="gridServerDataOptions" />
+    <GridFromServer
+      :server-data-source="gridServerDataSource"
+      :options="gridServerDataOptions"
+    />
   </div>
 </template>

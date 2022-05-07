@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { VFlexTableColumn } from './VFlexTable.vue'
+import { VFlexTableColumn } from './VFlexTable.vue';
 
 export interface VFlexTableCellProps {
-  column?: Partial<VFlexTableColumn>
+  column?: Partial<VFlexTableColumn>;
 }
 
 const props = withDefaults(defineProps<VFlexTableCellProps>(), {
   column: () => ({}),
-})
+});
 </script>
 
 <template>

@@ -1,5 +1,5 @@
-import { useThemeColors } from '/@src/composable/useThemeColors'
-const themeColors = useThemeColors()
+import { useThemeColors } from '/@src/composable/useThemeColors';
+const themeColors = useThemeColors();
 
 export const teamGaugeOptions = {
   series: [76],
@@ -68,4 +68,4 @@ export const teamGaugeOptions = {
     },
   },
   labels: ['Average Results'],
-}
+};

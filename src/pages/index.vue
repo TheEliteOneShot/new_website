@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { useHead } from '@vueuse/head'
-
+import { useHead } from '@vueuse/head';
 useHead({
   title: 'Vuero - A complete Vue 3 design system',
-})
+});
 </script>
 
 <template>
@@ -13,7 +12,6 @@ useHead({
       <div id="Vuero-marketing" class="hero marketing-hero is-left is-fullheight">
         <!-- Navbar partial -->
         <LandingEmptyNavigation />
-
         <!--Hexagon shapes-->
         <img
           class="hexagon hexagon-1 light-image-l"
@@ -58,14 +56,14 @@ useHead({
 
         <div class="hero-body">
           <div class="container">
-            <div class="columns is-vcentered">
-              <div class="column is-5">
+            <div class="columns is-centered is-vcentered">
+              <div class="column display-content">
                 <h1 class="title is-1 is-bold">Welcome to the beginning</h1>
                 <h3 class="subtitle is-4 pt-2 light-text">
                   In the beginning there it began
                 </h3>
               </div>
-              <div class="column is-7">
+              <!-- <div class="column is-7">
                 <img
                   class="light-image-l hero-mockup"
                   src="/@src/assets/illustrations/landing/app-2.png"
@@ -76,7 +74,7 @@ useHead({
                   src="/@src/assets/illustrations/landing/app-2-dark.png"
                   alt=""
                 />
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -84,7 +82,6 @@ useHead({
 
       <!--Feature boxes section-->
       <a id="features" name="features" aria-label="Features" />
-
 
       <!-- Back To Top Button -->
       <div id="backtotop">
@@ -99,6 +96,10 @@ useHead({
 <style lang="scss">
 @import '/@src/scss/abstracts/all';
 @import '/@src/scss/_demo/landing';
+
+.display-content {
+  display: contents !important;
+}
 
 .marketing-hero {
   position: relative;

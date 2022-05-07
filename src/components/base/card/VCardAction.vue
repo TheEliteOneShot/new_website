@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { onUpdated, ref, useSlots } from 'vue'
+import { onUpdated, ref, useSlots } from 'vue';
 
-export type VCardActionRadius = 'regular' | 'smooth' | 'rounded'
+export type VCardActionRadius = 'regular' | 'smooth' | 'rounded';
 export interface VCardActionProps {
-  title: string
-  subtitle?: string
-  avatar?: string
-  badge?: string
-  content?: string
-  radius?: VCardActionRadius
+  title: string;
+  subtitle?: string;
+  avatar?: string;
+  badge?: string;
+  content?: string;
+  radius?: VCardActionRadius;
 }
 
 const props = withDefaults(defineProps<VCardActionProps>(), {
@@ -17,14 +17,14 @@ const props = withDefaults(defineProps<VCardActionProps>(), {
   badge: undefined,
   content: undefined,
   radius: 'regular',
-})
+});
 
-const slots = useSlots()
-const hasDefaultSlot = ref(!!slots.default?.())
+const slots = useSlots();
+const hasDefaultSlot = ref(!!slots.default?.());
 
 onUpdated(() => {
-  hasDefaultSlot.value = !!slots.default?.()
-})
+  hasDefaultSlot.value = !!slots.default?.();
+});
 </script>
 
 <template>

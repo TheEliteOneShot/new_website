@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { toRefs } from 'vue'
+import { toRefs } from 'vue';
 
 export interface VCollapseItem {
-  title: string
-  content: string
+  title: string;
+  content: string;
 }
 export interface VCollapseEmits {
-  (e: 'update:modelValue', index?: number): void
+  (e: 'update:modelValue', index?: number): void;
 }
 export interface VCollapseProps {
-  items: VCollapseItem[]
-  modelValue?: number
-  withChevron?: boolean
+  items: VCollapseItem[];
+  modelValue?: number;
+  withChevron?: boolean;
 }
 
-const emit = defineEmits<VCollapseEmits>()
+const emit = defineEmits<VCollapseEmits>();
 const props = withDefaults(defineProps<VCollapseProps>(), {
   modelValue: undefined,
-})
-const { modelValue } = toRefs(props)
+});
+const { modelValue } = toRefs(props);
 
 const toggle = (key: number) => {
   if (modelValue.value === key) {
-    emit('update:modelValue')
-    return
+    emit('update:modelValue');
+    return;
   }
 
-  emit('update:modelValue', key)
-}
+  emit('update:modelValue', key);
+};
 </script>
 
 <template>

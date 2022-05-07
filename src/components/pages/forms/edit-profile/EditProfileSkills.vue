@@ -1,53 +1,53 @@
 <script setup lang="ts">
-import { useWindowScroll } from '@vueuse/core'
-import { computed, ref } from 'vue'
-import { useNotyf } from '/@src/composable/useNotyf'
-import sleep from '/@src/utils/sleep'
+import { useWindowScroll } from '@vueuse/core';
+import { computed, ref } from 'vue';
+import { useNotyf } from '/@src/composable/useNotyf';
+import sleep from '/@src/utils/sleep';
 
-const notyf = useNotyf()
-const { y } = useWindowScroll()
+const notyf = useNotyf();
+const { y } = useWindowScroll();
 
-const isLoading = ref(false)
-const isEditingLanguages = ref(false)
-const isEditingSkills = ref(false)
-const isEditingTools = ref(false)
+const isLoading = ref(false);
+const isEditingLanguages = ref(false);
+const isEditingSkills = ref(false);
+const isEditingTools = ref(false);
 
-const selectedLanguage = ref('')
-const selectedLanguageLevel = ref('')
+const selectedLanguage = ref('');
+const selectedLanguageLevel = ref('');
 
-const selectedSkill = ref('')
-const selectedSkillLevel = ref('')
+const selectedSkill = ref('');
+const selectedSkillLevel = ref('');
 
-const selectedTool = ref('')
-const selectedToolLevel = ref('')
+const selectedTool = ref('');
+const selectedToolLevel = ref('');
 
 const isScrolling = computed(() => {
-  return y.value > 30
-})
+  return y.value > 30;
+});
 const addLanguage = async () => {
-  isEditingLanguages.value = false
-  await onSave()
-  selectedLanguage.value = ''
-  selectedLanguageLevel.value = ''
-}
+  isEditingLanguages.value = false;
+  await onSave();
+  selectedLanguage.value = '';
+  selectedLanguageLevel.value = '';
+};
 const addSkill = async () => {
-  isEditingSkills.value = false
-  await onSave()
-  selectedSkill.value = ''
-  selectedSkillLevel.value = ''
-}
+  isEditingSkills.value = false;
+  await onSave();
+  selectedSkill.value = '';
+  selectedSkillLevel.value = '';
+};
 const addTool = async () => {
-  isEditingTools.value = false
-  await onSave()
-  selectedTool.value = ''
-  selectedToolLevel.value = ''
-}
+  isEditingTools.value = false;
+  await onSave();
+  selectedTool.value = '';
+  selectedToolLevel.value = '';
+};
 const onSave = async () => {
-  isLoading.value = true
-  await sleep()
-  notyf.success('Your changes have been successfully saved!')
-  isLoading.value = false
-}
+  isLoading.value = true;
+  await sleep();
+  notyf.success('Your changes have been successfully saved!');
+  isLoading.value = false;
+};
 </script>
 
 <template>

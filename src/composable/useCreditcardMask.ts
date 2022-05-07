@@ -1,6 +1,6 @@
-import type { InputMask } from 'imask'
-import { MaskedRange } from 'imask'
-import { ref } from 'vue'
+import type { InputMask } from 'imask';
+import { MaskedRange } from 'imask';
+import { ref } from 'vue';
 
 export type VCreditCardColor =
   | 'grey'
@@ -11,12 +11,12 @@ export type VCreditCardColor =
   | 'red'
   | 'yellow'
   | 'lightblue'
-  | 'cyan'
+  | 'cyan';
 
 export function useCreditcardMask() {
-  const creditcardIcon = ref('')
-  const creditcardLogo = ref('')
-  const creditcardColor = ref<VCreditCardColor>('grey')
+  const creditcardIcon = ref('');
+  const creditcardLogo = ref('');
+  const creditcardColor = ref<VCreditCardColor>('grey');
 
   const creditcardMaskDate = {
     mask: Date, // enable date mask
@@ -39,24 +39,24 @@ export function useCreditcardMask() {
     },
     // define date -> value convertion
     format: (date: Date) => {
-      const month = date.getMonth() + 1
-      const year = date.getFullYear()
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
 
-      return [month < 10 ? `0${month}` : month, year.toString().substr(2, 2)].join('/')
+      return [month < 10 ? `0${month}` : month, year.toString().substr(2, 2)].join('/');
     },
     // define value -> date convertion
     parse: (value: string) => {
-      const monthYear = value.split('/')
+      const monthYear = value.split('/');
       if (monthYear.length === 2) {
-        return new Date(parseInt(monthYear[1]) + 2000, parseInt(monthYear[0]) - 1, 1)
+        return new Date(parseInt(monthYear[1]) + 2000, parseInt(monthYear[0]) - 1, 1);
       }
-      return new Date()
+      return new Date();
     },
-  }
+  };
 
   const creditcardMaskCVC = {
     mask: '000',
-  }
+  };
 
   const creditcardMaskNumber = {
     mask: [
@@ -171,26 +171,26 @@ export function useCreditcardMask() {
       },
     ],
     dispatch: function (appended: string, dynamicMasked: any) {
-      const number = (dynamicMasked.value + appended).replace(/\D/g, '')
+      const number = (dynamicMasked.value + appended).replace(/\D/g, '');
 
       for (let i = 0; i < dynamicMasked.compiledMasks.length; i++) {
-        const re = new RegExp(dynamicMasked.compiledMasks[i].regex)
+        const re = new RegExp(dynamicMasked.compiledMasks[i].regex);
         if (number.match(re) != null) {
-          return dynamicMasked.compiledMasks[i]
+          return dynamicMasked.compiledMasks[i];
         }
       }
     },
-  }
+  };
 
   const creditcardMaskNumberOnAccept = (inputMask: InputMask<any>) => {
-    const currentMask: any = (inputMask.masked as any).currentMask
+    const currentMask: any = (inputMask.masked as any).currentMask;
 
     if (currentMask && 'card' in currentMask) {
-      creditcardIcon.value = currentMask.card.icon
-      creditcardLogo.value = currentMask.card.logo
-      creditcardColor.value = currentMask.card.color
+      creditcardIcon.value = currentMask.card.icon;
+      creditcardLogo.value = currentMask.card.logo;
+      creditcardColor.value = currentMask.card.color;
     }
-  }
+  };
 
   return {
     creditcardIcon,
@@ -200,5 +200,5 @@ export function useCreditcardMask() {
     creditcardMaskCVC,
     creditcardMaskNumber,
     creditcardMaskNumberOnAccept,
-  }
+  };
 }

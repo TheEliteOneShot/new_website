@@ -1,18 +1,18 @@
 <script setup lang="ts">
-export type VLoaderSize = 'small' | 'large' | 'xl'
-export type VLoaderWrapperRadius = 'regular' | 'smooth' | 'rounded'
+export type VLoaderSize = 'small' | 'large' | 'xl';
+export type VLoaderWrapperRadius = 'regular' | 'smooth' | 'rounded';
 export interface VLoaderProps {
-  size?: VLoaderSize
-  card?: VLoaderWrapperRadius
-  active?: boolean
-  grey?: boolean
-  translucent?: boolean
+  size?: VLoaderSize;
+  card?: VLoaderWrapperRadius;
+  active?: boolean;
+  grey?: boolean;
+  translucent?: boolean;
 }
 
 const props = withDefaults(defineProps<VLoaderProps>(), {
   size: undefined,
   card: undefined,
-})
+});
 </script>
 
 <template>

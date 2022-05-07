@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PropType } from 'vue'
+import type { PropType } from 'vue';
 
 import {
   InjectionKey,
@@ -11,82 +11,82 @@ import {
   watch,
   provide,
   watchEffect,
-} from 'vue'
-import { useDebounce } from '@vueuse/core'
+} from 'vue';
+import { useDebounce } from '@vueuse/core';
 
-import type { VFlexTableColumn } from './VFlexTable.vue'
-import VFlexTableSortColumn from './VFlexTableSortColumn.vue'
+import type { VFlexTableColumn } from './VFlexTable.vue';
+import VFlexTableSortColumn from './VFlexTableSortColumn.vue';
 
 export type VFlexTableWrapperDataResolver<T = any> = (parameters: {
-  searchTerm: string
-  start: number
-  limit: number
-  sort?: string
-  controller?: AbortController
-}) => T[] | Promise<T[]>
+  searchTerm: string;
+  start: number;
+  limit: number;
+  sort?: string;
+  controller?: AbortController;
+}) => T[] | Promise<T[]>;
 
 export type VFlexTableWrapperSortFunction<T = any> = (parameters: {
-  key: string
-  column: Partial<VFlexTableWrapperColumn>
-  order: 'asc' | 'desc'
-  a: T
-  b: T
-}) => number
+  key: string;
+  column: Partial<VFlexTableWrapperColumn>;
+  order: 'asc' | 'desc';
+  a: T;
+  b: T;
+}) => number;
 
 export type VFlexTableWrapperFilterFunction<T = any> = (parameters: {
-  searchTerm: string
-  value: any
-  row: T
-  column: Partial<VFlexTableWrapperColumn>
-  index: number
-}) => boolean
+  searchTerm: string;
+  value: any;
+  row: T;
+  column: Partial<VFlexTableWrapperColumn>;
+  index: number;
+}) => boolean;
 
 export interface VFlexTableWrapperColumn extends VFlexTableColumn {
-  searchable?: boolean
-  sortable?: boolean
-  sort?: VFlexTableWrapperSortFunction
-  filter?: VFlexTableWrapperFilterFunction
+  searchable?: boolean;
+  sortable?: boolean;
+  sort?: VFlexTableWrapperSortFunction;
+  filter?: VFlexTableWrapperFilterFunction;
 }
 
 export interface VFlexTableWrapperInjection {
-  data?: any[] | undefined
-  columns?: Record<string, Partial<VFlexTableWrapperColumn>>
-  loading?: boolean
-  searchInput?: string
-  searchTerm?: string
-  start?: number
-  limit?: number
-  sort?: string
-  page?: number
-  total?: number
-  totalPages?: number
+  data?: any[] | undefined;
+  columns?: Record<string, Partial<VFlexTableWrapperColumn>>;
+  loading?: boolean;
+  searchInput?: string;
+  searchTerm?: string;
+  start?: number;
+  limit?: number;
+  sort?: string;
+  page?: number;
+  total?: number;
+  totalPages?: number;
 }
 
-export const flewTableWrapperSymbol: InjectionKey<VFlexTableWrapperInjection> = Symbol()
+export const flewTableWrapperSymbol: InjectionKey<VFlexTableWrapperInjection> = Symbol();
 
-const defaultFormatter = (value: any) => value
+const defaultFormatter = (value: any) => value;
 const defaultSortFunction: VFlexTableWrapperSortFunction = ({ key, order, a, b }) => {
-  const aValue = a[key]
-  const bValue = b[key]
+  const aValue = a[key];
+  const bValue = b[key];
 
   if (typeof aValue === 'string') {
     if (order === 'asc') {
-      return aValue.localeCompare(bValue)
+      return aValue.localeCompare(bValue);
     } else {
-      return bValue.localeCompare(aValue)
+      return bValue.localeCompare(aValue);
     }
   }
 
   if (aValue > bValue) {
-    return order === 'asc' ? 1 : -1
+    return order === 'asc' ? 1 : -1;
   }
 
   if (aValue < bValue) {
-    return order === 'asc' ? -1 : 1
+    return order === 'asc' ? -1 : 1;
   }
 
-  return 0
-}
+  return 0;
+};
 
 export default defineComponent({
   props: {
@@ -125,79 +125,79 @@ export default defineComponent({
   },
   emits: ['update:sort', 'update:page', 'update:limit', 'update:searchTerm'],
   setup(props, context) {
-    const rawData = ref<any[]>()
-    const loading = ref(false)
+    const rawData = ref<any[]>();
+    const loading = ref(false);
 
-    const defaultSort = ref('')
+    const defaultSort = ref('');
     const sort = computed({
       get: () => props.sort ?? defaultSort.value,
       set(value) {
         if (props.sort === undefined) {
-          defaultSort.value = value
+          defaultSort.value = value;
         } else {
-          context.emit('update:sort', value)
+          context.emit('update:sort', value);
         }
       },
-    })
+    });
 
-    const defaultSearchInput = ref('')
+    const defaultSearchInput = ref('');
     const searchInput = computed({
       get: () => props.searchTerm ?? defaultSearchInput.value,
       set(value) {
         if (props.searchTerm === undefined) {
-          defaultSearchInput.value = value
+          defaultSearchInput.value = value;
         } else {
-          context.emit('update:searchTerm', value)
+          context.emit('update:searchTerm', value);
         }
       },
-    })
+    });
 
-    const defaultPage = ref(1)
+    const defaultPage = ref(1);
     const page = computed({
       get: () => props.page ?? defaultPage.value,
       set(value) {
         if (props.page === undefined) {
-          defaultPage.value = value
+          defaultPage.value = value;
         } else {
-          context.emit('update:page', value)
+          context.emit('update:page', value);
         }
       },
-    })
+    });
 
-    const defaultLimit = ref(10)
+    const defaultLimit = ref(10);
     const limit = computed({
       get: () => Math.max(1, props.limit ?? defaultLimit.value),
       set(value) {
         if (props.limit === undefined) {
-          defaultLimit.value = value
+          defaultLimit.value = value;
         } else {
-          context.emit('update:limit', value)
+          context.emit('update:limit', value);
         }
       },
-    })
+    });
 
     const columns = computed(() => {
-      const columnProps = props.columns
-      if (!columnProps) return columnProps
+      const columnProps = props.columns;
+      if (!columnProps) return columnProps;
 
-      const wrapperColumns: Record<string, Partial<VFlexTableWrapperColumn>> = {}
+      const wrapperColumns: Record<string, Partial<VFlexTableWrapperColumn>> = {};
 
       Object.keys(columnProps).reduce((acc, key) => {
-        const value = columnProps[key]
+        const value = columnProps[key];
 
         if (typeof value === 'string') {
           acc[key] = {
             format: defaultFormatter,
             label: value,
             key,
-          }
+          };
         } else if (typeof value === 'object') {
           acc[key] = {
             format: defaultFormatter,
             label: key,
             key,
             ...value,
-          }
+          };
 
           if (value.sortable === true) {
             if (value.renderHeader) {
@@ -213,8 +213,8 @@ export default defineComponent({
                   {
                     default: value.renderHeader,
                   }
-                )
-              }
+                );
+              };
             } else {
               acc[key].renderHeader = () => {
                 return h(VFlexTableSortColumn, {
@@ -223,43 +223,43 @@ export default defineComponent({
                   noRouter: true,
                   modelValue: sort.value,
                   'onUpdate:modelValue': (value) => (sort.value = value),
-                })
-              }
+                });
+              };
             }
           }
 
           if (value.searchable === true && !value.sort) {
-            acc[key].sort = defaultSortFunction
+            acc[key].sort = defaultSortFunction;
           }
         }
 
-        return acc
-      }, wrapperColumns)
+        return acc;
+      }, wrapperColumns);
 
-      return wrapperColumns
-    })
+      return wrapperColumns;
+    });
 
     const filteredData = computed(() => {
-      let data = rawData.value
-      if (!data) return data
-      if (typeof props.data === 'function') return data
+      let data = rawData.value;
+      if (!data) return data;
+      if (typeof props.data === 'function') return data;
 
       // filter data
       if (searchTerm.value) {
         const searchableColumns = columns.value
           ? (Object.values(columns.value).filter((column) => {
-              if (!column || typeof column === 'string') return false
-              return column.searchable === true
+              if (!column || typeof column === 'string') return false;
+              return column.searchable === true;
             }) as Partial<VFlexTableWrapperColumn>[])
-          : []
+          : [];
 
         if (searchableColumns.length) {
-          const _searchRe = new RegExp(searchTerm.value, 'i')
+          const _searchRe = new RegExp(searchTerm.value, 'i');
           data = data.filter((row, index) => {
             return searchableColumns.some((column) => {
-              if (!column.key) return false
+              if (!column.key) return false;
 
-              const value = row[column.key]
+              const value = row[column.key];
 
               if (column.filter) {
                 return column.filter({
@@ -268,41 +268,41 @@ export default defineComponent({
                   row,
                   column,
                   index,
-                })
+                });
               }
 
-              if (typeof value === 'string') return value.match(_searchRe)
+              if (typeof value === 'string') return value.match(_searchRe);
 
-              return false
-            })
-          })
+              return false;
+            });
+          });
         }
       }
 
-      return data
-    })
+      return data;
+    });
 
     const sortedData = computed(() => {
-      let data = filteredData.value
-      if (!data) return data
-      if (typeof props.data === 'function') return data
+      let data = filteredData.value;
+      if (!data) return data;
+      if (typeof props.data === 'function') return data;
 
       // sort data
       if (sort.value && sort.value.includes(':')) {
-        const [sortField, sortOrder] = sort.value.split(':') as [string, 'desc' | 'asc']
+        const [sortField, sortOrder] = sort.value.split(':') as [string, 'desc' | 'asc'];
 
         const sortingColumn = columns.value
           ? (Object.values(columns.value).find((column) => {
-              if (!column || typeof column === 'string') return false
-              return column.sortable === true && column.key === sortField
+              if (!column || typeof column === 'string') return false;
+              return column.sortable === true && column.key === sortField;
             }) as Partial<VFlexTableWrapperColumn>)
-          : null
+          : null;
 
         if (sortingColumn) {
-          const sorted = [...data]
+          const sorted = [...data];
           sorted.sort((a, b) => {
-            if (!sortingColumn.key) return 0
-            if (!sortingColumn.sort) return 0
+            if (!sortingColumn.key) return 0;
+            if (!sortingColumn.sort) return 0;
 
             return sortingColumn.sort({
               order: sortOrder,
@@ -310,35 +310,35 @@ export default defineComponent({
               key: sortingColumn.key,
               a,
               b,
-            })
-          })
-          data = sorted
+            });
+          });
+          data = sorted;
         }
       }
 
-      return data
-    })
+      return data;
+    });
 
     const data = computed(() => {
-      if (typeof props.data === 'function') return rawData.value
-      if (!rawData.value) return rawData.value
+      if (typeof props.data === 'function') return rawData.value;
+      if (!rawData.value) return rawData.value;
 
-      let data = sortedData.value
+      let data = sortedData.value;
 
       // paginate data
-      return data?.slice(start.value, start.value + limit.value)
-    })
+      return data?.slice(start.value, start.value + limit.value);
+    });
 
-    const searchTerm = useDebounce(searchInput, props.debounceSearch)
-    const total = computed(() => props.total ?? sortedData.value?.length ?? 0)
-    const start = computed(() => (page.value - 1) * limit.value)
+    const searchTerm = useDebounce(searchInput, props.debounceSearch);
+    const total = computed(() => props.total ?? sortedData.value?.length ?? 0);
+    const start = computed(() => (page.value - 1) * limit.value);
     const totalPages = computed(() =>
       total.value ? Math.ceil(total.value / limit.value) : 0
-    )
+    );
 
     async function fetchData(controller?: AbortController) {
       if (typeof props.data === 'function') {
-        loading.value = true
+        loading.value = true;
 
         try {
           rawData.value = await props.data({
@@ -347,33 +347,33 @@ export default defineComponent({
             limit: limit.value,
             sort: sort.value,
             controller,
-          })
+          });
         } finally {
-          loading.value = false
+          loading.value = false;
         }
       }
     }
 
     watch([searchTerm, limit], () => {
       if (page.value !== 1) {
-        page.value = 1
+        page.value = 1;
       }
-    })
+    });
 
     watchEffect(async (onInvalidate) => {
-      let controller: AbortController
+      let controller: AbortController;
 
       if (typeof props.data === 'function') {
-        controller = new AbortController()
-        await fetchData(controller)
+        controller = new AbortController();
+        await fetchData(controller);
       } else {
-        rawData.value = props.data
+        rawData.value = props.data;
       }
 
       onInvalidate(() => {
-        controller?.abort()
-      })
-    })
+        controller?.abort();
+      });
+    });
 
     const wrapperState = reactive({
       data,
@@ -388,16 +388,16 @@ export default defineComponent({
       total,
       totalPages,
       fetchData,
-    }) as VFlexTableWrapperInjection
+    }) as VFlexTableWrapperInjection;
 
-    provide(flewTableWrapperSymbol, wrapperState)
+    provide(flewTableWrapperSymbol, wrapperState);
 
     return () => {
-      const slotContent = context.slots.default?.(wrapperState)
-      return h('div', { class: 'flex-table-wrapper' }, slotContent)
-    }
+      const slotContent = context.slots.default?.(wrapperState);
+      return h('div', { class: 'flex-table-wrapper' }, slotContent);
+    };
   },
-})
+});
 </script>
 
 <style lang="scss">

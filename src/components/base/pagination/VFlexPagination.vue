@@ -1,97 +1,97 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute, RouteLocationOptions } from 'vue-router'
-import { useI18n } from 'vue-i18n'
+import { computed } from 'vue';
+import { useRoute, RouteLocationOptions } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
 export interface VFlexPaginationProps {
-  itemPerPage: number
-  totalItems: number
-  currentPage?: number
-  maxLinksDisplayed?: number
-  noRouter?: boolean
-  routerQueryKey?: string
+  itemPerPage: number;
+  totalItems: number;
+  currentPage?: number;
+  maxLinksDisplayed?: number;
+  noRouter?: boolean;
+  routerQueryKey?: string;
 }
 
 export interface VFlexPaginationEmits {
-  (e: 'update:currentPage', currentPage: number): void
+  (e: 'update:currentPage', currentPage: number): void;
 }
 
-const emits = defineEmits<VFlexPaginationEmits>()
+const emits = defineEmits<VFlexPaginationEmits>();
 const props = withDefaults(defineProps<VFlexPaginationProps>(), {
   currentPage: 1,
   maxLinksDisplayed: 4,
   useRouter: true,
   routerQueryKey: 'page',
-})
+});
 
-const { t } = useI18n()
-const route = useRoute()
-const lastPage = computed(() => Math.ceil(props.totalItems / props.itemPerPage) || 1)
+const { t } = useI18n();
+const route = useRoute();
+const lastPage = computed(() => Math.ceil(props.totalItems / props.itemPerPage) || 1);
 const totalPageDisplayed = computed(() =>
   lastPage.value > props.maxLinksDisplayed + 2
     ? props.maxLinksDisplayed + 2
     : lastPage.value
-)
+);
 const pages = computed(() => {
-  const _pages = []
-  let firstButton = props.currentPage - Math.floor(totalPageDisplayed.value / 2)
+  const _pages = [];
+  let firstButton = props.currentPage - Math.floor(totalPageDisplayed.value / 2);
   let lastButton =
-    firstButton + (totalPageDisplayed.value - Math.ceil(totalPageDisplayed.value % 2))
+    firstButton + (totalPageDisplayed.value - Math.ceil(totalPageDisplayed.value % 2));
 
   if (firstButton < 1) {
-    firstButton = 1
-    lastButton = firstButton + (totalPageDisplayed.value - 1)
+    firstButton = 1;
+    lastButton = firstButton + (totalPageDisplayed.value - 1);
   }
 
   if (lastButton > lastPage.value) {
-    lastButton = lastPage.value
-    firstButton = lastButton - (totalPageDisplayed.value - 1)
+    lastButton = lastPage.value;
+    firstButton = lastButton - (totalPageDisplayed.value - 1);
   }
 
   for (let page = firstButton; page <= lastButton; page += 1) {
     if (page === firstButton || page === lastButton) {
-      continue
+      continue;
     }
 
-    _pages.push(page)
+    _pages.push(page);
   }
 
-  return _pages
-})
+  return _pages;
+});
 
-const showLastLink = computed(() => lastPage.value > 1)
+const showLastLink = computed(() => lastPage.value > 1);
 
 const paginatedLink = (page = 1) => {
   if (props.noRouter) {
-    return {}
+    return {};
   }
 
-  const _page = Math.max(1, Math.min(page, lastPage.value))
+  const _page = Math.max(1, Math.min(page, lastPage.value));
   const query: any = {
     ...route.query,
-  }
+  };
 
   if (props.routerQueryKey) {
-    query[props.routerQueryKey] = _page <= 1 ? undefined : _page
+    query[props.routerQueryKey] = _page <= 1 ? undefined : _page;
   }
 
   return {
     name: route.name,
     params: route.params,
     query,
-  } as RouteLocationOptions
-}
+  } as RouteLocationOptions;
+};
 const handleLinkClick = (e: MouseEvent, page = 1) => {
-  const _page = Math.max(1, Math.min(page, lastPage.value))
-  emits('update:currentPage', _page)
+  const _page = Math.max(1, Math.min(page, lastPage.value));
+  emits('update:currentPage', _page);
 
   if (props.noRouter) {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
 
-    return false
+    return false;
   }
-}
+};
 </script>
 
 <i18n lang="yaml">

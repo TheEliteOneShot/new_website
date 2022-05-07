@@ -1,48 +1,48 @@
 <script setup lang="ts">
-import { useWindowScroll } from '@vueuse/core'
-import { computed, ref } from 'vue'
+import { useWindowScroll } from '@vueuse/core';
+import { computed, ref } from 'vue';
 
-import { useNotyf } from '/@src/composable/useNotyf'
-import sleep from '/@src/utils/sleep'
-import { onceImageErrored } from '/@src/utils/via-placeholder'
+import { useNotyf } from '/@src/composable/useNotyf';
+import sleep from '/@src/utils/sleep';
+import { onceImageErrored } from '/@src/utils/via-placeholder';
 
-const isUploading = ref(false)
-const isLoading = ref(false)
-const range = ref()
+const isUploading = ref(false);
+const isLoading = ref(false);
+const range = ref();
 
-const notyf = useNotyf()
-const { y } = useWindowScroll()
+const notyf = useNotyf();
+const { y } = useWindowScroll();
 
 const isScrolling = computed(() => {
-  return y.value > 30
-})
+  return y.value > 30;
+});
 
 const onAddFile = (error: any, file: any) => {
   if (error) {
-    console.error(error)
-    return
+    console.error(error);
+    return;
   }
 
-  console.log('file added', file)
-}
+  console.log('file added', file);
+};
 const onRemoveFile = (error: any, file: any) => {
   if (error) {
-    console.error(error)
-    return
+    console.error(error);
+    return;
   }
 
-  console.log('file removed', file)
-}
+  console.log('file removed', file);
+};
 const addExperience = async () => {
-  isUploading.value = false
-  onSave()
-}
+  isUploading.value = false;
+  onSave();
+};
 const onSave = async () => {
-  isLoading.value = true
-  await sleep()
-  notyf.success('Your changes have been successfully saved!')
-  isLoading.value = false
-}
+  isLoading.value = true;
+  await sleep();
+  notyf.success('Your changes have been successfully saved!');
+  isLoading.value = false;
+};
 </script>
 
 <template>

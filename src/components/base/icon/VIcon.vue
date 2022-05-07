@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 export interface VIconProps {
-  icon: string
+  icon: string;
 }
 
-const props = defineProps<VIconProps>()
+const props = defineProps<VIconProps>();
 
 const isIconify = computed(() => {
-  return props.icon && props.icon.indexOf(':') !== -1
-})
+  return props.icon && props.icon.indexOf(':') !== -1;
+});
 </script>
 
 <template>
